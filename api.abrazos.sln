@@ -5,6 +5,14 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api.abrazos", "api.abrazos\api.abrazos.csproj", "{7E409BCC-C068-463F-A2A2-313AD022FDF8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Percistence", "Percistence", "{CB89D8AF-9DCC-4528-8532-6DB9F2EBF571}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{131FE38F-BF55-4986-A599-3B5C9C45A762}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence.Database", "Persistence.Database\Persistence.Database.csproj", "{955DC231-22C7-43B1-84B9-55DBEB570F3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{FB0DD677-3D5F-4DFF-BD85-CBBA0E01F1AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +23,21 @@ Global
 		{7E409BCC-C068-463F-A2A2-313AD022FDF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E409BCC-C068-463F-A2A2-313AD022FDF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E409BCC-C068-463F-A2A2-313AD022FDF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{955DC231-22C7-43B1-84B9-55DBEB570F3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{955DC231-22C7-43B1-84B9-55DBEB570F3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{955DC231-22C7-43B1-84B9-55DBEB570F3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{955DC231-22C7-43B1-84B9-55DBEB570F3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB0DD677-3D5F-4DFF-BD85-CBBA0E01F1AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB0DD677-3D5F-4DFF-BD85-CBBA0E01F1AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB0DD677-3D5F-4DFF-BD85-CBBA0E01F1AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB0DD677-3D5F-4DFF-BD85-CBBA0E01F1AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{955DC231-22C7-43B1-84B9-55DBEB570F3A} = {CB89D8AF-9DCC-4528-8532-6DB9F2EBF571}
+		{FB0DD677-3D5F-4DFF-BD85-CBBA0E01F1AE} = {131FE38F-BF55-4986-A599-3B5C9C45A762}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C99F877F-4456-4021-AB9B-10548CF4E359}
