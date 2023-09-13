@@ -1,14 +1,15 @@
-# Abrazos App web Api
+### Abrazos App web Api
 
 This is the web app for ...  
 
-## Technologies and structure
+### Technologies and structure
 
-The app utilizes React.js, Redux and Material-UI on the frontend, and .Net, Entity Framework on the backend and Sql server. 
-It follows a common folder structure, with a separation between the Web API and the client. 
+The app utilizes .Net, Entity Framework on the backend and Sql server. 
+It follows a common folder structure.
 
+```
 +project-root/
-  +├── api/
+  ├── api/
   │   ├── Models
   │   ├── Persistence
   │       ├── Persisstence.DataBase
@@ -20,23 +21,7 @@ It follows a common folder structure, with a separation between the Web API and 
   │       ├── Program.cs
   │       ├── AbrazosApi.cs
 
-    
-  ├── client/
-  │   ├── public/
-  │   ├── src/
-  │   │   ├── components/
-  │   │   ├── pages/
-  │   │   ├── redux/
-  │   │   ├── utils/
-  │   │   ├── App.jsx
-  │   │   ├── main.css
-  │   │   ├── main.jsx
-  │   ├── index.html
-  │   └── package.json
-  ├── package.json
-  └── README.md
 ```
-
 
 <!-- DER  -->
 
