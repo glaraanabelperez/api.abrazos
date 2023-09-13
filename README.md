@@ -7,7 +7,7 @@ This is the web app for ...
 The app utilizes .Net, Entity Framework on the backend and Sql server. 
 It follows a common folder structure.
 
-```
+
 +project-root/
   ├── api/
   │   ├── Models
@@ -21,7 +21,7 @@ It follows a common folder structure.
   │       ├── Program.cs
   │       ├── AbrazosApi.cs
 
-```
+
 
 <!-- DER  -->
 
