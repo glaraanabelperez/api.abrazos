@@ -7,8 +7,8 @@ This is the web app for ...
 The app utilizes React.js, Redux and Material-UI on the frontend, and .Net, Entity Framework on the backend and Sql server. 
 It follows a common folder structure, with a separation between the Web API and the client. 
 
-project-root/
-  ├── api/
++project-root/
+  +├── api/
   │   ├── Models
   │   ├── Persistence
   │       ├── Persisstence.DataBase
