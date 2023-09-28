@@ -13,7 +13,7 @@ namespace Persistence.Database
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
-        public virtual DbSet<User> Users { get; set; } = null!;
+        public virtual DbSet<Users> Users { get; set; } = null!;
         //public virtual DbSet<Address> Addresses { get; set; } = null!;
         //public virtual DbSet<DocumentType> DocumentTypes { get; set; } = null!;
 

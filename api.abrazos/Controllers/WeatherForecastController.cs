@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Storage;
 using Models;
@@ -7,6 +8,7 @@ namespace api.abrazos.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class WeatherForecastController : ControllerBase
     {
         public AbrazosDbContext _db;
@@ -25,17 +27,19 @@ namespace api.abrazos.Controllers
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
-        public async Task<User> Get()
+        public async Task<Users> Get()
         {
-            using(IDbContextTransaction trans =_db.Database.BeginTransaction())
-            {
-                var user = new User();
-                user.Name = "Lara";
-                await _db.AddAsync(user);
-                await _db.SaveChangesAsync();
-                await trans.CommitAsync();
-            return user;
-            }
+            var vvv = 1;
+            return null;
+            //using(IDbContextTransaction trans =_db.Database.BeginTransaction())
+            //{
+            //    var user = new Users();
+            //    user.Name = "Lara";
+            //    await _db.AddAsync(user);
+            //    await _db.SaveChangesAsync();
+            //    await trans.CommitAsync();
+            //return user;
+            //}
             
             //return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             //{
