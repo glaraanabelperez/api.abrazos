@@ -41,21 +41,16 @@ namespace Models
                 var credentials = Encoding.UTF8.GetString(credentialBytes).Split(':');
                 var username = credentials[0];
                 var password = credentials[1];
+                Users? user;
 
                 using (IDbContextTransaction trans = _db.Database.BeginTransaction())
                 {
-                    try{
-
-                    }catch(Exception e)
-                    {
-                        throw new Exception("Error in the authtentication");
-                    }
-                    var user = _db.Users
-                       .Where(u => u.UserName == username && u.Pass== password)
-                       .SingleOrDefault();
+                    user = _db.Users
+                         .Where(u => u.UserName == username && u.Pass == password)
+                         .SingleOrDefault();
                 }
-
-                if (username == "test" && password == "123")
+    
+                if (user!=null)
                 {
                     var claims = new[] { new Claim(ClaimTypes.Name, username) };
                     var identity = new ClaimsIdentity(claims, Scheme.Name);
