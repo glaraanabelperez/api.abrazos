@@ -1,12 +1,9 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using Abrazos.Persistence.Database;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Persistence.Database;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
-using System.Linq.Expressions;
 using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Text;
@@ -41,7 +38,7 @@ namespace Models
                 var credentials = Encoding.UTF8.GetString(credentialBytes).Split(':');
                 var username = credentials[0];
                 var password = credentials[1];
-                Users? user;
+                UserDto? user;
 
                 using (IDbContextTransaction trans = _db.Database.BeginTransaction())
                 {

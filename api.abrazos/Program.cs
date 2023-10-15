@@ -20,6 +20,9 @@ builder.Services.AddHealthChecks();
 
 // Add services to the container.
 builder.Services.AddTransient<AbrazosDbContext, ApplicationDbContext>();
+builder.Services.AddTransient<AbrazosDbContext, ApplicationDbContext>();
+
+
 builder.Services.AddAuthentication("BasicAuthentication")
     .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
 

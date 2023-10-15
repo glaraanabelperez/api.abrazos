@@ -5,7 +5,6 @@ namespace Models
 {
     public class Users 
     {
-        [Required]
         public int UserId { get; set; }
         public string Name { get; set; }
         public string Pass { get; set; }

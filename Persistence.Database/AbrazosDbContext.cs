@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
-namespace Persistence.Database
+namespace Abrazos.Persistence.Database
 {
     public abstract class AbrazosDbContext : DbContext
     {

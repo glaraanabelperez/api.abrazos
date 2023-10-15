@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Models;
 
-namespace Persistence.Database.Configurations
+namespace Abrazos.Persistence.Database.Configurations
 {
     public class UserConfiguration : IEntityTypeConfiguration<Users>
     {

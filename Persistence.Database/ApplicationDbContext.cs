@@ -1,13 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+﻿using Abrazos.Persistence.Database.Configurations;
+using Microsoft.EntityFrameworkCore;
 using Models;
-using Persistence.Database;
-using Persistence.Database.Configurations;
-using System.Net;
-using System.Text;
-using System.Xml.Linq;
 
-namespace Persistence.Database
+
+namespace Abrazos.Persistence.Database
 {
     public  class ApplicationDbContext : AbrazosDbContext
     {
