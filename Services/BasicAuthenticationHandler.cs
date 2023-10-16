@@ -1,4 +1,5 @@
 ﻿using Abrazos.Persistence.Database;
+using Abrazos.Services.Dto;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
@@ -38,13 +39,13 @@ namespace Models
                 var credentials = Encoding.UTF8.GetString(credentialBytes).Split(':');
                 var username = credentials[0];
                 var password = credentials[1];
-                UserDto? user;
+                Users user = null;
 
                 using (IDbContextTransaction trans = _db.Database.BeginTransaction())
                 {
                     user = _db.Users
                          .Where(u => u.UserName == username && u.Pass == password)
-                         .SingleOrDefault();
+                         .First();
                 }
     
                 if (user!=null)

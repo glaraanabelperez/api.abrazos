@@ -12,6 +12,6 @@ namespace Abrazos.Services.Dto
         public int Pages { get; set; }
         public int Page { get; set; }
         public int Take { get; set; }
-        public IEnumerable<T> Items { get; set; }
+        public IEnumerable<T>? Items { get; set; }
     }
 }

@@ -4,7 +4,6 @@ using Abrazos.Persistence.Database;
 using Abrazos.Services.Dto;
 using Abrazos.Services.Interfaces;
 using AutoMapper;
-using MercadoPago.Resource.Payment;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;

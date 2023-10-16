@@ -1,8 +1,10 @@
 using Microsoft.EntityFrameworkCore;
-using Persistence.Database;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Authentication;
 using Models;
+using Abrazos.Persistence.Database;
+using Abrazos.ServicesEvenetHandler.Intefaces;
+using Abrazos.ServiceEventHandler;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +22,8 @@ builder.Services.AddHealthChecks();
 
 // Add services to the container.
 builder.Services.AddTransient<AbrazosDbContext, ApplicationDbContext>();
-builder.Services.AddTransient<AbrazosDbContext, ApplicationDbContext>();
+builder.Services.AddTransient<IUserEventHandler, UserEventHandler>();
+builder.Services.AddTransient<IGenericRepository, GenericRepository>();
 
 
 builder.Services.AddAuthentication("BasicAuthentication")

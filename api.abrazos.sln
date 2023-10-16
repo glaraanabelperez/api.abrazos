@@ -13,9 +13,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence.Database", "Per
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{FB0DD677-3D5F-4DFF-BD85-CBBA0E01F1AE}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{08D1554C-6F2A-483F-AF6D-160F1086FF4B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServicesQueries", "ServicesQueries", "{08D1554C-6F2A-483F-AF6D-160F1086FF4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{0E0EBD45-5672-4423-ADA8-4CF6D4B630D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServicesQueries", "Services\ServicesQueries.csproj", "{0E0EBD45-5672-4423-ADA8-4CF6D4B630D6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServiceEventHandler", "ServiceEventHandler", "{4F47AEDC-26A6-49C8-847E-583A0A42D347}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceEventHandler", "ServiceEventHandler\ServiceEventHandler.csproj", "{D45E7190-3985-4BC0-BC24-7CA71A0639E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,10 @@ Global
 		{0E0EBD45-5672-4423-ADA8-4CF6D4B630D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E0EBD45-5672-4423-ADA8-4CF6D4B630D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E0EBD45-5672-4423-ADA8-4CF6D4B630D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D45E7190-3985-4BC0-BC24-7CA71A0639E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D45E7190-3985-4BC0-BC24-7CA71A0639E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D45E7190-3985-4BC0-BC24-7CA71A0639E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D45E7190-3985-4BC0-BC24-7CA71A0639E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -47,6 +55,7 @@ Global
 		{955DC231-22C7-43B1-84B9-55DBEB570F3A} = {CB89D8AF-9DCC-4528-8532-6DB9F2EBF571}
 		{FB0DD677-3D5F-4DFF-BD85-CBBA0E01F1AE} = {131FE38F-BF55-4986-A599-3B5C9C45A762}
 		{0E0EBD45-5672-4423-ADA8-4CF6D4B630D6} = {08D1554C-6F2A-483F-AF6D-160F1086FF4B}
+		{D45E7190-3985-4BC0-BC24-7CA71A0639E1} = {4F47AEDC-26A6-49C8-847E-583A0A42D347}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C99F877F-4456-4021-AB9B-10548CF4E359}

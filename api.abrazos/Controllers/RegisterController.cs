@@ -1,6 +1,8 @@
 using Abrazos.Persistence.Database;
+using Abrazos.ServiceEventHandler.Commands;
 using Abrazos.Services.Dto;
 using Abrazos.Services.Interfaces;
+using Abrazos.ServicesEvenetHandler.Intefaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,27 +12,26 @@ namespace api.abrazos.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    [Authorize]
-    public class UserController : ControllerBase
+    public class RegisterController : ControllerBase
     {
         public AbrazosDbContext _db;
         private readonly ILogger<UserController> _logger;
-        private readonly IUserQueryService userService;
+        private readonly IGenericRepository userService;
 
-        public UserController(ILogger<UserController> logger, AbrazosDbContext dbcontext, IUserQueryService IUserService)
+        public RegisterController(ILogger<UserController> logger, AbrazosDbContext dbcontext, IGenericRepository IUserEventHandler)
         {
             _logger = logger;
             _db = dbcontext;
-            userService = IUserService;
+            userService = IUserEventHandler;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetUserById(int userId)
+        public async Task<IActionResult> GetUserById(UserAddCommand userAdd)
         {
-            var user = await userService.GatAsync(userId);
+            userService.Add(userAdd);
 
             _logger.LogWarning($"GatAsync  | user:  ");
-            return Ok(user);
+            return Ok();
 
         }
     }
