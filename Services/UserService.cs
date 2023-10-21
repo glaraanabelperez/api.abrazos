@@ -13,7 +13,7 @@ using System.Xml.Linq;
 
 namespace Abrazos.Services
 {
-    public class UserService :IUserService
+    public class UserService :IUserQueryService
     {
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;

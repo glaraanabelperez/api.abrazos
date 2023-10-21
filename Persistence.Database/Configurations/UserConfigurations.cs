@@ -4,20 +4,40 @@ using Models;
 
 namespace Abrazos.Persistence.Database.Configurations
 {
-    public class UserConfiguration : IEntityTypeConfiguration<Users>
+    public class UserConfiguration : IEntityTypeConfiguration<User>
     {
-        public void Configure(EntityTypeBuilder<Users> builder)
+        public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.HasKey(e => e.UserId);
-
             builder.ToTable("Users");
+            builder.Property(e => e.UserId)
+                .HasColumnType("int")
+                .HasColumnName("UserId");
 
             builder.Property(e => e.Name)
-                .HasColumnName("Name");
-
+              .HasColumnName("Name");
+            builder.Property(e => e.LastName)
+              .HasColumnName("LastName");
+            builder.Property(e => e.UserName)
+              .HasColumnName("UserName");
             builder.Property(e => e.Pass)
-                .HasColumnName("Pass");
-         
+              .HasColumnName("Pass");
+            builder.Property(e => e.Email)
+              .HasColumnName("Email");
+            builder.Property(e => e.Age)
+              .HasColumnName("Age");
+            builder.Property(e => e.Celphone)
+              .HasColumnName("Celphone");
+            builder.Property(e => e.AvatarImage)
+              .HasColumnName("AvatarImage");
+            builder.Property(e => e.ProfileDancer_FK)
+                .HasColumnName("ProfileDancer_FK");
+            builder.Property(e => e.UserState)
+                .HasColumnName("UserState");
+
+            builder.HasMany(e => e.Address)
+                .WithOne()
+                .HasForeignKey(e => e.UserId_FK);
 
         }
     }

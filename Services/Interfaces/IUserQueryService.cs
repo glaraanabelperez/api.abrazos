@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Abrazos.Services.Interfaces
 {
-    public interface IUserService
+    public interface IUserQueryService
     {
         public Task<DataCollection<UserDto>> GetAllAsync(
                                                                 int page,

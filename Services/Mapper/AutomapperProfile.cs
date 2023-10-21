@@ -9,8 +9,8 @@ namespace Services.Mapper
         public AutomapperProfile()
         {
             //-- Users -----------
-            CreateMap<UserDto, Models.Users>().ReverseMap();
-            CreateMap<DataCollection<UserDto>, DataCollection<Models.Users>>().ForMember(dest => dest.Items, sour => sour.MapFrom(s => s.Items));
+            CreateMap<UserDto, Models.User>().ReverseMap();
+            CreateMap<DataCollection<UserDto>, DataCollection<Models.User>>().ForMember(dest => dest.Items, sour => sour.MapFrom(s => s.Items));
 
 
         }

@@ -39,7 +39,7 @@ namespace Models
                 var credentials = Encoding.UTF8.GetString(credentialBytes).Split(':');
                 var username = credentials[0];
                 var password = credentials[1];
-                Users user = null;
+                User user = null;
 
                 using (IDbContextTransaction trans = _db.Database.BeginTransaction())
                 {
