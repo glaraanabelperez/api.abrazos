@@ -35,9 +35,34 @@ namespace Abrazos.Persistence.Database.Configurations
             builder.Property(e => e.UserState)
                 .HasColumnName("UserState");
 
+
             builder.HasMany(e => e.Address)
                 .WithOne()
                 .HasForeignKey(e => e.UserId_FK);
+
+
+            builder.HasMany(e => e.Images)
+                .WithOne()
+                .HasForeignKey(e => e.UserId_fk);
+
+
+            builder.HasMany(e => e.UserPermissions)
+                .WithOne()
+                .HasForeignKey(e => e.UserId_FK);
+
+
+            builder.HasMany(e => e.TypeEventsUsers)
+                .WithOne(user => user.User)
+                .HasForeignKey(e => e.UserId_FK);
+
+
+            builder.HasMany(w => w.WaitLists)
+                .WithOne(e => e.User)
+                .HasForeignKey(w => w.UserId_FK);
+
+            builder.HasMany(e => e.Events)
+                .WithOne(userCreator => userCreator.UserCreator)
+                .HasForeignKey(e => e.UserIdCreator_FK);
 
         }
     }

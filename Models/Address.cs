@@ -15,5 +15,7 @@ namespace Models
         
         public City City { get; set; } = new City();
 
+        public ICollection<Event> Events = new List<Event>();
+
     }
 }

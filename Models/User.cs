@@ -74,6 +74,19 @@ namespace Models
         /// 
         /// </summary>
         public ICollection<CouplesEvent_Date> CouplesEvents = new List<CouplesEvent_Date>();
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICollection<TypeEvent_User> TypeEventsUsers = new List<TypeEvent_User>();
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICollection<WaitList> WaitLists = new List<WaitList>();
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICollection<Event> EventsCreated = new List<Event>();
+
 
     }
 }

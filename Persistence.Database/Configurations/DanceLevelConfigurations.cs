@@ -16,7 +16,10 @@ namespace Abrazos.Persistence.Database.Configurations
 
             builder.Property(e => e.Name)
               .HasColumnName("Name");
-          
+
+            builder.HasMany(e => e.ProfileDancers).WithOne(e => e.DanceLevel)
+             .HasForeignKey(e => e.DanceLevel_FK);
+
         }
     }
 }

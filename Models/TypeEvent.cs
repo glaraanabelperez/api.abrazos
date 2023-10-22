@@ -7,6 +7,10 @@ namespace Models
     {
         public int TypeEventId { get; set; }
         public int UserId_FK { get; set; }
-       
+
+        public ICollection<TypeEvent_User> TypeEventsUsers = new List<TypeEvent_User>();
+
+        public ICollection<Event> Events = new List<Event>();
+
     }
 }

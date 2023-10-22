@@ -8,7 +8,7 @@ namespace Models
         public int UserPermissionId { get; set; }
         public int UserId_FK { get; set; }
         public int Permission_FK { get; set; }
-        public User user { get; set; }
-        public Permission permission { get; set; }
+        public User User { get; set; }
+        public Permission Permission { get; set; }
     }
 }

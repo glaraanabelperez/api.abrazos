@@ -30,6 +30,10 @@ namespace Abrazos.Persistence.Database.Configurations
             .WithMany(e => e.Address)
             .HasForeignKey(e => e.CityId_FK);
 
+            builder.HasMany(e => e.Events)
+           .WithOne(e => e.Address)
+           .HasForeignKey(e => e.AddressId_fk);
+
         }
     }
 }
