@@ -43,7 +43,7 @@ namespace Models
 
                 using (IDbContextTransaction trans = _db.Database.BeginTransaction())
                 {
-                    user = _db.Users
+                    user = _db.User
                          .Where(u => u.UserName == username && u.Pass == password)
                          .First();
                 }

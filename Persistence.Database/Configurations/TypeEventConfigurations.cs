@@ -21,6 +21,9 @@ namespace Abrazos.Persistence.Database.Configurations
                 .WithOne(TyEvent => TyEvent.TypeEvent)
                 .HasForeignKey(e => e.TypeEventId_FK);
 
+            builder.HasMany(e => e.Events)
+                .WithOne(TyEvent => TyEvent.TypeEvent)
+                .HasForeignKey(e => e.TypeEventId_fk);
 
         }
     }

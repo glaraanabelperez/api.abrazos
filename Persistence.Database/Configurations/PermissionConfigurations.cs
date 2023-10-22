@@ -4,15 +4,15 @@ using Models;
 
 namespace Abrazos.Persistence.Database.Configurations
 {
-    public class ImageConfiguration : IEntityTypeConfiguration<Image>
+    public class PermissionConfiguration : IEntityTypeConfiguration<Permission>
     {
-        public void Configure(EntityTypeBuilder<Image> builder)
+        public void Configure(EntityTypeBuilder<Permission> builder)
         {
-            builder.HasKey(e => e.ImageId);
-            builder.ToTable("Image");
-            builder.Property(e => e.ImageId)
+            builder.HasKey(e => e.PermissionId);
+            builder.ToTable("Permission");
+            builder.Property(e => e.PermissionId)
                 .HasColumnType("int")
-                .HasColumnName("ImageId");
+                .HasColumnName("PermissionId");
 
             builder.Property(e => e.Name)
               .HasColumnName("Name");

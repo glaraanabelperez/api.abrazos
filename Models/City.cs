@@ -3,16 +3,15 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Models
 {
-    public class Address
+    public class City
     {
-        public int AddressId { get; set; }
-        public int UserId_FK { get; set; }
-        public int CityId_FK { get; set; }
-        public string Street { get; set; }
-        public string Number { get; set; }
-        public string DetailAddress { get; set; }
-        public bool StateAddress { get; set; }
+        public int CityId { get; set; }
+        public int CountryId_FK { get; set; }
+        public string Name { get; set; }
 
-       
+        public Country Country { get; set; } = new Country();
+
+        public ICollection<Address> Address = new List<Address>();
+
     }
 }

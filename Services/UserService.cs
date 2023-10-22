@@ -33,7 +33,7 @@ namespace Abrazos.Services
 
         public async Task<UserDto> GatAsync(long userId)
         {
-            var data = (await _context.Users
+            var data = (await _context.User
                 .SingleOrDefaultAsync(x => x.UserId == userId));
 
             var result = _mapper.Map<UserDto>(data);
