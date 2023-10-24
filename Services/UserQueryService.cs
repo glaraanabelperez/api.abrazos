@@ -13,17 +13,17 @@ using System.Xml.Linq;
 
 namespace Abrazos.Services
 {
-    public class UserService :IUserQueryService
+    public class UserQueryService :IUserQueryService
     {
         private readonly ApplicationDbContext _context;
-        private readonly IMapper _mapper;
-        ILogger<UserService> _logger;
+        //private readonly IMapper _mapper;
+        ILogger<UserQueryService> _logger;
 
-        public UserService(ApplicationDbContext context, IMapper mapper, ILogger<UserService> logger)
+        public UserQueryService(ApplicationDbContext context)
         {
             _context = context;
-            _mapper = mapper;
-            _logger = logger;
+            //_mapper = mapper;
+            //_logger = logger;
         }
        
         public Task<DataCollection<UserDto>> GetAllAsync(int page, int take, string? name, string? userName, string? lastName, string? name_, byte? userStates)
@@ -36,8 +36,8 @@ namespace Abrazos.Services
             var data = (await _context.User
                 .SingleOrDefaultAsync(x => x.UserId == userId));
 
-            var result = _mapper.Map<UserDto>(data);
-            return result;
+            //var result = _mapper.Map<UserDto>(data);
+            return null;
         }
     }
 }

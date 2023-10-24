@@ -14,16 +14,14 @@ namespace Abrazos.Persistence.Database.Configurations
                 .HasColumnType("int")
                 .HasColumnName("TypeEventId");
 
-            builder.Property(e => e.UserId_FK)
-              .HasColumnName("UserId_FK");
+            builder.Property(e => e.Name)
+              .HasColumnName("Name");
 
             builder.HasMany(e => e.TypeEventsUsers)
                 .WithOne(TyEvent => TyEvent.TypeEvent)
                 .HasForeignKey(e => e.TypeEventId_FK);
 
-            builder.HasMany(e => e.Events)
-                .WithOne(TyEvent => TyEvent.TypeEvent)
-                .HasForeignKey(e => e.TypeEventId_fk);
+        
 
         }
     }

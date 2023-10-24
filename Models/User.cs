@@ -50,10 +50,8 @@ namespace Models
         /// 
         /// </summary>
         public byte UserState { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public ICollection<Event> Events = new List<Event>();
+
+
         /// <summary>
         /// 
         /// </summary>

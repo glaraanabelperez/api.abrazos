@@ -5,6 +5,8 @@ using Models;
 using Abrazos.Persistence.Database;
 using Abrazos.ServicesEvenetHandler.Intefaces;
 using Abrazos.ServiceEventHandler;
+using Abrazos.Services.Interfaces;
+using Abrazos.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +26,7 @@ builder.Services.AddHealthChecks();
 builder.Services.AddTransient<AbrazosDbContext, ApplicationDbContext>();
 builder.Services.AddTransient<IUserEventHandler, UserEventHandler>();
 builder.Services.AddTransient<IGenericRepository, GenericRepository>();
+builder.Services.AddTransient<IUserQueryService, UserQueryService>();
 
 
 builder.Services.AddAuthentication("BasicAuthentication")

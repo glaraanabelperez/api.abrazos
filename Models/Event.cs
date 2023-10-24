@@ -20,7 +20,7 @@ namespace Models
 
         public ICollection<CouplesEvent_Date> CouplesEvents = new List<CouplesEvent_Date>();
 
-        public TypeEvent TypeEvent = new TypeEvent();
+        //public ICollection<TypeEvent_User> TypeEvent_User = new List<TypeEvent_User>();
 
         public User UserCreator = new User();
 

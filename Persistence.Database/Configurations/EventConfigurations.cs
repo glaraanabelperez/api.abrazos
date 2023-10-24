@@ -38,13 +38,13 @@ namespace Abrazos.Persistence.Database.Configurations
             builder.Property(e => e.TypeEventId_fk)
            .HasColumnName("TypeEventId_fk");
 
-            builder.HasOne(e => e.TypeEvent)
-                .WithMany(Events => Events.Events)
-                .HasForeignKey(e => e.TypeEvent.TypeEventId);
+            builder.HasOne(w => w.Address)
+                    .WithMany(e => e.Events)
+                    .HasForeignKey(w => w.AddressId_fk);
 
-            builder.HasOne(e => e.UserCreator)
-                .WithMany(Events => Events.Events)
-                .HasForeignKey(e => e.UserIdCreator_FK);
+            builder.HasOne(w => w.UserCreator)
+                    .WithMany(e => e.EventsCreated)
+                    .HasForeignKey(w => w.UserIdCreator_FK);
 
             builder.HasMany(w => w.WaitLists)
                 .WithOne(e => e.Event)

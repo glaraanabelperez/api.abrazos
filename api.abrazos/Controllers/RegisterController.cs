@@ -26,7 +26,7 @@ namespace api.abrazos.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetUserById(UserAddCommand userAdd)
+        public async Task<IActionResult> GetUserById(UserCreateCommand userAdd)
         {
             userService.Add(userAdd);
 

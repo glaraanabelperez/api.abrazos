@@ -9,13 +9,13 @@ namespace Abrazos.ServiceEventHandler
 {
     public class GenericRepository : IGenericRepository
     {
-        private readonly ILogger _logger;
+        //private readonly ILogger _logger;
         private readonly ApplicationDbContext _dbContext;
 
-        public GenericRepository(ApplicationDbContext dbContext, ILogger logger)
+        public GenericRepository(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
-            _logger = logger;
+            //_logger = logger;
         }
 
         public async void Add<T>(T entity) where T : class
@@ -35,7 +35,7 @@ namespace Abrazos.ServiceEventHandler
                     await transac.RollbackAsync();
 
                     string value = ((ex.InnerException != null) ? ex.InnerException!.Message : ex.Message);
-                    _logger.LogWarning(value);
+                    //_logger.LogWarning(value);
                 }
             }
 
