@@ -1,6 +1,7 @@
 ﻿
 
 using Abrazos.Persistence.Database;
+using Abrazos.ServiceEventHandler.Commands;
 using Abrazos.ServicesEvenetHandler.Intefaces;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
@@ -18,7 +19,7 @@ namespace Abrazos.ServiceEventHandler
             //_logger = logger;
         }
 
-        public async void Add<T>(T entity) where T : class
+        public async Task<T> Add<T>(T entity) where T : class
         {
            
             using (IDbContextTransaction transac = await _dbContext.Database.BeginTransactionAsync())
@@ -26,9 +27,10 @@ namespace Abrazos.ServiceEventHandler
                 try
                 {
                     var dbSet = _dbContext.Set<T>();
-                    dbSet.Add(entity);
+                    var result= dbSet.Add(entity);
                     _dbContext.SaveChanges();
                     await transac.CommitAsync();
+                    return null;
                 }
                 catch (System.Exception ex)
                 {
@@ -37,6 +39,7 @@ namespace Abrazos.ServiceEventHandler
                     string value = ((ex.InnerException != null) ? ex.InnerException!.Message : ex.Message);
                     //_logger.LogWarning(value);
                 }
+                return null;
             }
 
         }
@@ -50,7 +53,6 @@ namespace Abrazos.ServiceEventHandler
         {
             throw new NotImplementedException();
         }
-
 
     }
 }

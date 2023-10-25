@@ -5,7 +5,7 @@ namespace Abrazos.Services.Interfaces
 {
     public interface IUserQueryService
     {
-        public Task<DataCollection<UserDto>> GetAllAsync(
+        Task<DataCollection<UserDto>> GetAllAsync(
                                                                 int page,
                                                                 int take,                                                                                                                             string? name,
                                                                 string? userName,
@@ -14,7 +14,7 @@ namespace Abrazos.Services.Interfaces
                                                                 byte? userStates
                                                             );
 
-        public Task<UserDto> GatAsync(long userId);
+        Task<UserDto> GatAsync(long userId);
 
 
     }

@@ -1,6 +1,7 @@
 using Abrazos.Persistence.Database;
-using Abrazos.Services.Dto;
+using Abrazos.ServiceEventHandler.Commands;
 using Abrazos.Services.Interfaces;
+using Abrazos.ServicesEvenetHandler.Intefaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,26 +11,42 @@ namespace api.abrazos.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    [Authorize]
     public class UserController : ControllerBase
     {
         public AbrazosDbContext _db;
         private readonly ILogger<UserController> _logger;
-        private readonly IUserQueryService userService;
+        private readonly IUserQueryService _userService;
+        private readonly IUserCreateHandler _userCreateHandler;
 
-        public UserController(ILogger<UserController> logger, AbrazosDbContext dbcontext, IUserQueryService IUserService)
+        public UserController(
+          ILogger<UserController> logger,
+          AbrazosDbContext dbcontext,
+          IUserQueryService IUserService,
+          IUserCreateHandler IUserCreatehandler
+        )
         {
             _logger = logger;
             _db = dbcontext;
-            userService = IUserService;
+            _userService = IUserService;
+            _userCreateHandler = IUserCreatehandler;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetUserById(int userId)
         {
-            var user = await userService.GatAsync(userId);
+            var user = await _userService.GatAsync(userId);
 
             _logger.LogWarning($"GatAsync  | user:  ");
+            return Ok(user);
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddUser(UserCreateCommand User)
+        {      
+            var user =  _userCreateHandler.AddUser(User);
+
+            //_logger.LogWarning($"GatAsync  | user:  ");
             return Ok(user);
 
         }

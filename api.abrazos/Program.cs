@@ -24,7 +24,7 @@ builder.Services.AddHealthChecks();
 
 // Add services to the container.
 builder.Services.AddTransient<AbrazosDbContext, ApplicationDbContext>();
-builder.Services.AddTransient<IUserEventHandler, UserEventHandler>();
+builder.Services.AddTransient<IUserCreateHandler, UserCreateHandler>();
 builder.Services.AddTransient<IGenericRepository, GenericRepository>();
 builder.Services.AddTransient<IUserQueryService, UserQueryService>();
 

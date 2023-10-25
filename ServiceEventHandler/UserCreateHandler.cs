@@ -5,31 +5,40 @@ using Abrazos.ServiceEventHandler.Commands;
 using Abrazos.ServicesEvenetHandler.Intefaces;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
+using Models;
 using ServiceEventHandler.Command;
 
 namespace Abrazos.ServiceEventHandler
 {
-    public class UserEventHandler: IUserEventHandler
+    public class UserCreateHandler: IUserCreateHandler
     {
         //private readonly ILogger _logger;
         private readonly ApplicationDbContext _dbContext;
+        public IGenericRepository command;
 
-        public UserEventHandler(ApplicationDbContext dbContext)
+        public UserCreateHandler(ApplicationDbContext dbContext, IGenericRepository command)
         {
             _dbContext = dbContext;
+            this.command = command;
         }
 
-        public async void Add<T>(T entity) where T : class
+        public async Task<UserCreateCommand> AddUser(UserCreateCommand entity)
         {
 
             using (IDbContextTransaction transac = await _dbContext.Database.BeginTransactionAsync())
             {
                 try
                 {
-                    var dbSet = _dbContext.Set<T>();
-                    dbSet.Add(entity);
-                    _dbContext.SaveChanges();
-                    await transac.CommitAsync();
+                    var user = new User();
+                    user.Name= entity.UserName;
+                    user.UserState = 1;
+                    user.Pass = "1234";
+                    var result = await this.command.Add<User>(user);
+                    //var dbSet = _dbContext.Set<T>();
+                    //dbSet.Add(entity);
+                    //_dbContext.SaveChanges();
+                    //await transac.CommitAsync();
+                    return null;
                 }
                 catch (System.Exception ex)
                 {
@@ -38,21 +47,18 @@ namespace Abrazos.ServiceEventHandler
                     string value = ((ex.InnerException != null) ? ex.InnerException!.Message : ex.Message);
                     //_logger.LogWarning(value);
                 }
+                return null;
+
             }
 
         }
 
-        public void Delete<T>(int id) where T : class
+        public void Test()
         {
             throw new NotImplementedException();
         }
 
-        public void Update<T>(T entity) where T : class
-        {
-            throw new NotImplementedException();
-        }
-
-
+  
     }
 }
 
