@@ -7,6 +7,8 @@ using Abrazos.ServicesEvenetHandler.Intefaces;
 using Abrazos.ServiceEventHandler;
 using Abrazos.Services.Interfaces;
 using Abrazos.Services;
+using Serilog;
+using Microsoft.AspNetCore.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,12 +34,26 @@ builder.Services.AddTransient<IUserQueryService, UserQueryService>();
 builder.Services.AddAuthentication("BasicAuthentication")
     .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
 
+//Config Mapper
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+//Config Logger
+IConfiguration configuration = new ConfigurationBuilder()
+             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+             .Build();
+Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(configuration).CreateLogger();
+builder.Host.UseSerilog();
+
+
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

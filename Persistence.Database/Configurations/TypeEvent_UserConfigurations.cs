@@ -8,11 +8,11 @@ namespace Abrazos.Persistence.Database.Configurations
     {
         public void Configure(EntityTypeBuilder<TypeEvent_User> builder)
         {
-            builder.HasKey(e => e.TypeEventUserId);
+            builder.HasKey(e => e.TypeEventUser_Id);
             builder.ToTable("TypeEvent_User");
-            builder.Property(e => e.TypeEventUserId)
+            builder.Property(e => e.TypeEventUser_Id)
                 .HasColumnType("int")
-                .HasColumnName("TypeEventUserId");
+                .HasColumnName("TypeEventUser_Id");
 
             builder.Property(e => e.TypeEventId_FK)
               .HasColumnName("TypeEventId_FK");
@@ -21,11 +21,11 @@ namespace Abrazos.Persistence.Database.Configurations
 
             builder.HasOne(e => e.User)
                 .WithMany(typeEventUser => typeEventUser.TypeEventsUsers)
-                .HasForeignKey(e => e.User.UserId);
+                .HasForeignKey(e => e.UserId_FK);
 
             builder.HasOne(e => e.TypeEvent)
                 .WithMany(typeEventUser => typeEventUser.TypeEventsUsers)
-                .HasForeignKey(e => e.TypeEvent.TypeEventId);
+                .HasForeignKey(e => e.TypeEventId_FK);
         }
     }
 }

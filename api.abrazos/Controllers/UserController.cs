@@ -13,7 +13,6 @@ namespace api.abrazos.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
-        public AbrazosDbContext _db;
         private readonly ILogger<UserController> _logger;
         private readonly IUserQueryService _userService;
         private readonly IUserCreateHandler _userCreateHandler;
@@ -26,7 +25,6 @@ namespace api.abrazos.Controllers
         )
         {
             _logger = logger;
-            _db = dbcontext;
             _userService = IUserService;
             _userCreateHandler = IUserCreatehandler;
         }
@@ -41,14 +39,6 @@ namespace api.abrazos.Controllers
 
         }
 
-        [HttpPost]
-        public async Task<IActionResult> AddUser(UserCreateCommand User)
-        {      
-            var user =  _userCreateHandler.AddUser(User);
-
-            //_logger.LogWarning($"GatAsync  | user:  ");
-            return Ok(user);
-
-        }
+        
     }
 }

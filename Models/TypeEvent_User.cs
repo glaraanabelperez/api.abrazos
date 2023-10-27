@@ -5,7 +5,7 @@ namespace Models
 {
     public class TypeEvent_User 
     {
-        public int TypeEventUserId { get; set; }
+        public int TypeEventUser_Id { get; set; }
         public int TypeEventId_FK { get; set; }
         public int UserId_FK { get; set; }
 

@@ -15,15 +15,13 @@ namespace Abrazos.Services
 {
     public class UserQueryService :IUserQueryService
     {
-        private readonly ApplicationDbContext _context;
-        //private readonly IMapper _mapper;
+        private readonly IMapper _mapper;
         ILogger<UserQueryService> _logger;
 
-        public UserQueryService(ApplicationDbContext context)
+        public UserQueryService(ApplicationDbContext context, ILogger<UserQueryService> logger, IMapper mapper)
         {
-            _context = context;
-            //_mapper = mapper;
-            //_logger = logger;
+            _mapper = mapper;
+            _logger = logger;
         }
        
         public Task<DataCollection<UserDto>> GetAllAsync(int page, int take, string? name, string? userName, string? lastName, string? name_, byte? userStates)
@@ -33,10 +31,7 @@ namespace Abrazos.Services
 
         public async Task<UserDto> GatAsync(long userId)
         {
-            var data = (await _context.User
-                .SingleOrDefaultAsync(x => x.UserId == userId));
-
-            //var result = _mapper.Map<UserDto>(data);
+           
             return null;
         }
     }

@@ -53,7 +53,7 @@ namespace Abrazos.Persistence.Database.Configurations
             builder.HasOne(e => e.Address)
                .WithMany(Events => Events.Events)
                .HasForeignKey(Event => Event.AddressId_fk);
-
+            //faltaria couples para este evento?
         }
     }
 }

@@ -6,18 +6,21 @@ using System.Threading.Tasks;
 
 namespace ServiceEventHandler.Command
 {
-    public  class Result<T>
+    public class ResultApp
     {
         public bool status { get; set; }
         public string? message { get; set; }
-        public T? objectResult { get; set; }
+        public object objectResult { get; set; }
 
-        public  Result( bool _status, string? _messagge, T? _object)
+        public ResultApp( bool _status, string? _messagge, object _object)
         {
             status = _status;
             message = _messagge;
             objectResult = _object;
         }
-        
+
+        public ResultApp()
+        {
+        }
     }
 }

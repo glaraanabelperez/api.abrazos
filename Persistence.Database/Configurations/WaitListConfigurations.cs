@@ -21,13 +21,13 @@ namespace Abrazos.Persistence.Database.Configurations
             builder.Property(e => e.State)
                 .HasColumnName("State");
 
-            builder.HasOne(e => e.Event)
-                .WithMany(w => w.WaitLists)
-                .HasForeignKey(e => e.EventId_FK);
+            //builder.HasOne(e => e.Event)
+            //    .WithMany(w => w.WaitLists)
+            //    .HasForeignKey(e => e.EventId_FK);
 
-            builder.HasOne(e => e.User)
-                .WithMany(w => w.WaitLists)
-                .HasForeignKey(e => e.UserId_FK);
+            //builder.HasOne(e => e.User)
+            //    .WithMany(w => w.WaitLists)
+            //    .HasForeignKey(e => e.UserId_FK);
         }
     }
 }

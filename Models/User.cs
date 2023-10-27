@@ -71,7 +71,11 @@ namespace Models
         /// <summary>
         /// 
         /// </summary>
-        public ICollection<CouplesEvent_Date> CouplesEvents = new List<CouplesEvent_Date>();
+        public ICollection<CouplesEvent_Date> CouplesEventsHost = new List<CouplesEvent_Date>();
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICollection<CouplesEvent_Date> CouplesEventsInvited = new List<CouplesEvent_Date>();
         /// <summary>
         /// 
         /// </summary>

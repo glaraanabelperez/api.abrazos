@@ -25,7 +25,6 @@ namespace Abrazos.ServiceEventHandler.Commands
         [MaxLength(100)]
         public string? AvatarImage { get; set; }
         public int? ProfileDancer_FK { get; set; }
-        public byte UserState { get; set; }
 
     }
 }
