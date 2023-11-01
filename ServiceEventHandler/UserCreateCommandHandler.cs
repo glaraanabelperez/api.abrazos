@@ -13,15 +13,15 @@ using System.Net.NetworkInformation;
 
 namespace Abrazos.ServiceEventHandler
 {
-    public class UserCreateHandler: IUserCreateHandler
+    public class UserCreateCommandHandler: IUserCreateCommandHandler
     {
-        private readonly ILogger<UserCreateHandler> _logger;
+        private readonly ILogger<UserCreateCommandHandler> _logger;
         private readonly ApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
         public IGenericRepository command;
 
-        public UserCreateHandler(ApplicationDbContext dbContext, IGenericRepository command, 
-            ILogger<UserCreateHandler> logger, IMapper mapper)
+        public UserCreateCommandHandler(ApplicationDbContext dbContext, IGenericRepository command, 
+            ILogger<UserCreateCommandHandler> logger, IMapper mapper)
         {
             _dbContext = dbContext;
             this.command = command;
@@ -31,25 +31,22 @@ namespace Abrazos.ServiceEventHandler
 
         public async Task<ResultApp> AddUser(UserCreateCommand entity)
         {
-           ResultApp? result = null;
+           //ResultApp result = new ResultApp();
            try
            {
-               var user = new User();
-               user.Name= entity.UserName;
-               user.UserState = 1;
-               user.Pass = "1234";
-
-               var object_= await this.command.Add<User>(user);
-               result = new ResultApp(true, "Create OK", _mapper.Map<UserDto>(object_));
-               return result;
+               var entity_ = _mapper.Map<User>(entity);
+               var res = await this.command.Add<User>(entity_);
+               //res.objectResult = _mapper.Map<UserDto>(res.objectResult);
+               return res ;
            }
            catch (System.Exception ex)
            {
                string value = ((ex.InnerException != null) ? ex.InnerException!.Message : ex.Message);
                _logger.LogWarning(value);
-           }
+                return null;
 
-           return result;
+            }
+
 
         }
 

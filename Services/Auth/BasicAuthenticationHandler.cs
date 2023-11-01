@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Models;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Net.Http.Headers;
 using System.Security.Claims;
@@ -11,7 +12,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 
 
-namespace Models
+namespace ServicesQueries.Auth
 {
 
     public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
@@ -47,8 +48,8 @@ namespace Models
                          .Where(u => u.UserName == username && u.Pass == password)
                          .First();
                 }
-    
-                if (user!=null)
+
+                if (user != null)
                 {
                     var claims = new[] { new Claim(ClaimTypes.Name, username) };
                     var identity = new ClaimsIdentity(claims, Scheme.Name);
@@ -69,4 +70,4 @@ namespace Models
         }
     }
 }
-   
+

@@ -13,29 +13,24 @@ namespace api.abrazos.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
-        private readonly ILogger<UserController> _logger;
         private readonly IUserQueryService _userService;
-        private readonly IUserCreateHandler _userCreateHandler;
+        //private readonly IUserCreateCommandHandler _userCreateHandler;
 
         public UserController(
-          ILogger<UserController> logger,
-          AbrazosDbContext dbcontext,
-          IUserQueryService IUserService,
-          IUserCreateHandler IUserCreatehandler
+              IUserQueryService IUserService
+              //IUserCreateCommandHandler IUserCreatehandler
         )
         {
-            _logger = logger;
             _userService = IUserService;
-            _userCreateHandler = IUserCreatehandler;
+            //_userCreateHandler = IUserCreatehandler;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetUserById(int userId)
         {
-            var user = await _userService.GatAsync(userId);
+            //var user = await _userService.GatAsync(userId);
 
-            _logger.LogWarning($"GatAsync  | user:  ");
-            return Ok(user);
+            return null;
 
         }
 

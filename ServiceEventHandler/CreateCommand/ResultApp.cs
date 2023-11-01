@@ -8,14 +8,15 @@ namespace ServiceEventHandler.Command
 {
     public class ResultApp
     {
-        public bool status { get; set; }
+        public bool Succeeded { get; set; }
+        public string? errors { get; set; }
         public string? message { get; set; }
         public object objectResult { get; set; }
 
         public ResultApp( bool _status, string? _messagge, object _object)
         {
-            status = _status;
-            message = _messagge;
+            Succeeded = _status;
+            errors = _messagge;
             objectResult = _object;
         }
 

@@ -4,7 +4,7 @@ using System;
 
 namespace Abrazos.ServicesEvenetHandler.Intefaces
 {
-    public interface IUserCreateHandler
+    public interface IUserCreateCommandHandler
     {
         public Task<ResultApp> AddUser(UserCreateCommand entity);
 

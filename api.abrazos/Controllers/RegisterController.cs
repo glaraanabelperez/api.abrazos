@@ -12,25 +12,27 @@ namespace api.abrazos.Controllers
     [Route("[controller]")]
     public class RegisterController : ControllerBase
     {
-        private readonly ILogger<UserController> _logger;
-        private readonly IUserCreateHandler _userCreateHandler;
+        private readonly IUserCreateCommandHandler _userCreateHandler;
 
         public RegisterController(
-          ILogger<UserController> logger,
-          IUserCreateHandler IUserCreatehandler
+          IUserCreateCommandHandler IUserCreatehandler
         )
         {
-            _logger = logger;
             _userCreateHandler = IUserCreatehandler;
         }
 
         [HttpPost]
         public async Task<IActionResult> AddUser(UserCreateCommand User)
         {
-            var user = await _userCreateHandler.AddUser(User);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-            _logger.LogWarning($"GatAsync  | User:  ");
-            return Ok(user);
+            var result = await _userCreateHandler.AddUser(User);
+            return result?.Succeeded ?? false
+                    ? Ok(result)
+                    : BadRequest(result?.errors);
 
         }
     }

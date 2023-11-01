@@ -1,14 +1,12 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Authentication;
-using Models;
 using Abrazos.Persistence.Database;
 using Abrazos.ServicesEvenetHandler.Intefaces;
 using Abrazos.ServiceEventHandler;
 using Abrazos.Services.Interfaces;
 using Abrazos.Services;
 using Serilog;
-using Microsoft.AspNetCore.Hosting;
+using ServicesQueries.Auth;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,15 +22,16 @@ builder.Services.AddDbContext<ApplicationDbContext>(
 builder.Services.AddHealthChecks();
 //.AddDbContextCheck<ApplicationDbContext>();
 
+
 // Add services to the container.
 builder.Services.AddTransient<AbrazosDbContext, ApplicationDbContext>();
-builder.Services.AddTransient<IUserCreateHandler, UserCreateHandler>();
 builder.Services.AddTransient<IGenericRepository, GenericRepository>();
+builder.Services.AddTransient<IUserCreateCommandHandler, UserCreateCommandHandler>();
 builder.Services.AddTransient<IUserQueryService, UserQueryService>();
-
 
 builder.Services.AddAuthentication("BasicAuthentication")
     .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
+
 
 //Config Mapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -43,8 +42,6 @@ IConfiguration configuration = new ConfigurationBuilder()
              .Build();
 Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(configuration).CreateLogger();
 builder.Host.UseSerilog();
-
-
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
