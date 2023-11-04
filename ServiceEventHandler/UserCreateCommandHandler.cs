@@ -54,7 +54,7 @@ namespace Abrazos.ServiceEventHandler
             {
                 user.ProfileDancers.DanceRol_FK = entity_.ProfileDancerCreateCommand.DanceRol_FK;
                 user.ProfileDancers.DanceLevel_FK = entity_.ProfileDancerCreateCommand.DanceLevel_FK;
-
+                user.ProfileDancers.Height = entity_.ProfileDancerCreateCommand.Height;
 
             }
 

@@ -39,6 +39,7 @@ namespace Abrazos.ServiceEventHandler
                     res.objectResult = _mapper.Map<UserDto>(res_.Entity);
                     await transac.CommitAsync();
 
+                    _logger.LogWarning(res_.Metadata.ToString());
                     res.Succeeded = true;
                     res.message = "Successful registration";
                     return res;

@@ -4,7 +4,7 @@
     {
         public int DanceLevelId { get; set; }
         public string Name { get; set; } = null!;
-        //public ICollection<ProfileDancer>? ProfileDancers { get; set; } = new List<ProfileDancer>();
+        public ICollection<ProfileDancer>? ProfileDancers { get; } 
 
     }
 }
