@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton(builder.Configuration);
 
-// dbContext
+// DbContext
 builder.Services.AddDbContext<ApplicationDbContext>(
     options => options.UseSqlServer(
        builder.Configuration["ConnectionStrings:DefaultConnection"]
@@ -29,6 +29,7 @@ builder.Services.AddTransient<IGenericRepository, GenericRepository>();
 builder.Services.AddTransient<IUserCreateCommandHandler, UserCreateCommandHandler>();
 builder.Services.AddTransient<IUserQueryService, UserQueryService>();
 
+
 builder.Services.AddAuthentication("BasicAuthentication")
     .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
 
@@ -37,27 +38,19 @@ builder.Services.AddAuthentication("BasicAuthentication")
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 //Config Logger
-IConfiguration configuration = new ConfigurationBuilder()
-             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-             .Build();
-Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(configuration).CreateLogger();
+Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(builder.Configuration).CreateLogger();
 builder.Host.UseSerilog();
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
 var app = builder.Build();
 
+app.UseSwagger();
+app.UseSwaggerUI();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
 app.UseRouting();
 app.UseHttpsRedirection();
 
@@ -72,37 +65,3 @@ app.MapControllers();
 
 app.Run();
 
-
-
-//////////////////////////////////
-///
-//builder.Services.AddTransient<CepasDbContext, ApplicationDbContext>();
-//builder.Services.AddTransient<IConsumerQueryService, ConsumerQueryService>();
-//builder.Services.AddTransient<IAddressQueryService, AddressQueryService>();
-//builder.Services.AddTransient<IDocumentTypeQueryService, DocumentTypeQueryService>();
-
-
-
-// Add services Authentification
-
-//var secretKey = Encoding.ASCII.GetBytes(
-//        builder.Configuration["SecretsKeys:SecretKeyLog"]
-//    );
-//builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(x =>
-//{
-//    x.RequireHttpsMetadata = false;
-//    x.SaveToken = true;
-//    x.TokenValidationParameters = new TokenValidationParameters
-//    {
-//        ValidateIssuerSigningKey = true,
-//        IssuerSigningKey = new SymmetricSecurityKey(secretKey),
-//        ValidateIssuer = false,
-//        ValidateAudience = false
-//    };
-//});
-
-
-
-
-// AutoMapper
-//builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

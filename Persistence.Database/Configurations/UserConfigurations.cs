@@ -16,22 +16,31 @@ namespace Abrazos.Persistence.Database.Configurations
 
             builder.Property(e => e.Name)
               .HasColumnName("Name");
+
             builder.Property(e => e.LastName)
               .HasColumnName("LastName");
+
             builder.Property(e => e.UserName)
               .HasColumnName("UserName");
+
             builder.Property(e => e.Pass)
               .HasColumnName("Pass");
+
             builder.Property(e => e.Email)
               .HasColumnName("Email");
+
             builder.Property(e => e.Age)
               .HasColumnName("Age");
+
             builder.Property(e => e.Celphone)
               .HasColumnName("Celphone");
+
             builder.Property(e => e.AvatarImage)
               .HasColumnName("AvatarImage");
-            builder.Property(e => e.ProfileDancer_FK)
-                .HasColumnName("ProfileDancer_FK");
+
+            builder.Property(e => e.ProfileDancerId_FK)
+                .HasColumnName("ProfileDancerId_FK");
+
             builder.Property(e => e.UserState)
                 .HasColumnName("UserState");
 
@@ -64,6 +73,11 @@ namespace Abrazos.Persistence.Database.Configurations
                 .WithOne(userCreator => userCreator.UserCreator)
                 .HasForeignKey(e => e.UserIdCreator_FK);
 
+            builder.HasOne(e => e.ProfileDancers)
+                .WithMany(user => user.Users)
+                .HasForeignKey(u => u.ProfileDancerId_FK);
+
+           
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Models
 
         public Country Country { get; set; } = new Country();
 
-        public ICollection<Address> Address = new List<Address>();
+        public ICollection<Address> Address { get; set; } = new List<Address>();
 
     }
 }

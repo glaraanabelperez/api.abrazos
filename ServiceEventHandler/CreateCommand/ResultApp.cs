@@ -9,7 +9,7 @@ namespace ServiceEventHandler.Command
     public class ResultApp
     {
         public bool Succeeded { get; set; }
-        public string? errors { get; set; }
+        public string? errors { get; set; } //Se pone el error de la exception??
         public string? message { get; set; }
         public object objectResult { get; set; }
 

@@ -4,7 +4,7 @@ namespace Abrazos.Services.Dto
 {
     public class UserDto 
     {
-        public int? UserId { get; set; }
+        public int UserId { get; set; }
         [Required]
         [MaxLength(100)]
         public string? Name { get; set; }
@@ -26,5 +26,8 @@ namespace Abrazos.Services.Dto
         public string? AvatarImage { get; set; }
         public string? ProfileDancer_FK { get; set; }
         public byte UserState { get; set; }
+        public ProfileDancerDto? ProfileDancers { get; set; }= new ProfileDancerDto();
+
+
     }
 }

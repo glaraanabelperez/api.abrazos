@@ -2,7 +2,9 @@
 
 using Abrazos.Persistence.Database;
 using Abrazos.ServiceEventHandler.Commands;
+using Abrazos.Services.Dto;
 using Abrazos.ServicesEvenetHandler.Intefaces;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
 using ServiceEventHandler.Command;
@@ -13,12 +15,13 @@ namespace Abrazos.ServiceEventHandler
     {
         private readonly ILogger<GenericRepository> _logger;
         private readonly ApplicationDbContext _dbContext;
+        private readonly IMapper _mapper;
 
-        public GenericRepository(ApplicationDbContext dbContext, ILogger<GenericRepository> logger)
+        public GenericRepository(ApplicationDbContext dbContext, ILogger<GenericRepository> logger, IMapper mapper)
         {
             _dbContext = dbContext;
             _logger = logger;
-            _logger = logger;
+            _mapper = mapper;
         }
 
         public async Task<ResultApp> Add<T>(T entity) where T : class
@@ -31,13 +34,13 @@ namespace Abrazos.ServiceEventHandler
                 {
                     var dbSet = _dbContext.Set<T>();
                     var res_ = dbSet.Add(entity);
-                    res.objectResult = res_.Entity;
                     _dbContext.SaveChanges();
+
+                    res.objectResult = _mapper.Map<UserDto>(res_.Entity);
                     await transac.CommitAsync();
 
                     res.Succeeded = true;
                     res.message = "Successful registration";
-                    _logger.LogWarning("OK");
                     return res;
                 }
                 catch (System.Exception ex)
@@ -45,8 +48,11 @@ namespace Abrazos.ServiceEventHandler
                     await transac.RollbackAsync();
                     string value = ((ex.InnerException != null) ? ex.InnerException!.Message : ex.Message);
                     _logger.LogWarning(value);
+                    res.Succeeded = false;
+                    res.message = "Error al Registrar el Usuario";
+                    return res;
                 }
-                return null;
+
             }
 
         }

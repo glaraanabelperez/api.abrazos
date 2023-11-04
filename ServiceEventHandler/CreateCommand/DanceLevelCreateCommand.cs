@@ -1,4 +1,5 @@
 ﻿using Models;
+using ServiceEventHandler.CreateCommand;
 using System.ComponentModel.DataAnnotations;
 
 namespace Abrazos.ServiceEventHandler.Commands
@@ -7,6 +8,6 @@ namespace Abrazos.ServiceEventHandler.Commands
     {
         [Required]
         [StringLength(255, MinimumLength = 8)]
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
     }
 }

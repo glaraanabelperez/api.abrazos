@@ -32,7 +32,7 @@ namespace api.abrazos.Controllers
             var result = await _userCreateHandler.AddUser(User);
             return result?.Succeeded ?? false
                     ? Ok(result)
-                    : BadRequest(result?.errors);
+                    : BadRequest(result?.message);
 
         }
     }

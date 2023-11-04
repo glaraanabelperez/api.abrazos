@@ -31,25 +31,35 @@ namespace Abrazos.ServiceEventHandler
 
         public async Task<ResultApp> AddUser(UserCreateCommand entity)
         {
-           //ResultApp result = new ResultApp();
-           try
-           {
-               var entity_ = _mapper.Map<User>(entity);
-               var res = await this.command.Add<User>(entity_);
-               //res.objectResult = _mapper.Map<UserDto>(res.objectResult);
-               return res ;
-           }
-           catch (System.Exception ex)
-           {
-               string value = ((ex.InnerException != null) ? ex.InnerException!.Message : ex.Message);
-               _logger.LogWarning(value);
-                return null;
+           
 
-            }
-
+           ResultApp res = await this.command.Add<User>(MapToUserEntity(entity));
+           return res ;
 
         }
 
+        public User MapToUserEntity(UserCreateCommand entity_)
+        {
+            User user = new User();
+            user.UserName = entity_.UserName;
+            user.Email = entity_.Email;
+            user.Celphone = entity_.Celphone;
+            user.Age = entity_.Age;
+            user.AvatarImage = entity_.AvatarImage;
+            user.LastName = entity_.LastName;
+            user.Name = entity_.Name;        
+            user.Pass = entity_.Pass;
+
+            if (entity_.ProfileDancerCreateCommand != null)
+            {
+                user.ProfileDancers.DanceRol_FK = entity_.ProfileDancerCreateCommand.DanceRol_FK;
+                user.ProfileDancers.DanceLevel_FK = entity_.ProfileDancerCreateCommand.DanceLevel_FK;
+
+
+            }
+
+            return user;
+        }
 
     
     }

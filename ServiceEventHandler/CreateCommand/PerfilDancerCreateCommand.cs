@@ -5,11 +5,16 @@ namespace Abrazos.ServiceEventHandler.Commands
 {
     public class PerfilDancerCreateCommand
     {
+        [Required]
+        public int DanceLevel_FK { get; set; }
+        [Required]
+        public int DanceRol_FK { get; set; }
         public decimal Height { get; set; }
-        [Required]
-        public DanceRolCreateCommand DanceRol { get; set; } = new DanceRolCreateCommand();
-        [Required]
+
         public DanceLevelCreateCommand DanceLevel { get; set; } = new DanceLevelCreateCommand();
+        public DanceRolCreateCommand DanceRol { get; set; } = new DanceRolCreateCommand();
+
+
     }
 
 }

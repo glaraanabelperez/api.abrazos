@@ -8,7 +8,7 @@ namespace Models
         public int TypeEventId { get; set; }
         public string Name { get; set; } = string.Empty;
 
-        public ICollection<TypeEvent_User> TypeEventsUsers = new List<TypeEvent_User>();
+        public ICollection<TypeEvent_User> TypeEventsUsers { get; set; } = new List<TypeEvent_User>();
 
     }
 }

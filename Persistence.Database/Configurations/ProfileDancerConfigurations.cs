@@ -21,10 +21,10 @@ namespace Abrazos.Persistence.Database.Configurations
             builder.Property(e => e.Height)
              .HasColumnName("Height");
 
-            builder.HasOne(e => e.DanceLevel).WithMany(e => e.ProfileDancers)
-                .HasForeignKey(e => e.DanceLevel_FK);
-            builder.HasOne(e => e.DanceRol).WithMany(e => e.ProfileDancers)
-                .HasForeignKey(e => e.DanceRol_FK);
+            //builder.HasOne(e => e.DanceRol).WithMany(e => e.ProfileDancers)
+            //    .HasForeignKey(e => e.DanceRol_FK);
+            //builder.HasOne(e => e.DanceLevel).WithMany(e => e.ProfileDancers)
+            //   .HasForeignKey(e => e.DanceLevel_FK);
         }
     }
 }

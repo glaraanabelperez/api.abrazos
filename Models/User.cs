@@ -45,7 +45,7 @@ namespace Models
         /// <summary>
         /// 
         /// </summary>
-        public string? ProfileDancer_FK { get; set; }
+        public int? ProfileDancerId_FK { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -55,39 +55,39 @@ namespace Models
         /// <summary>
         /// 
         /// </summary>
-        public ICollection<Address> Address = new List<Address>();
+        public ICollection<Address>? Address { get; set; } = new List<Address>();
         /// <summary>
         /// 
         /// </summary>
-        public ICollection<Image> Images = new List<Image>();
+        public ICollection<Image>? Images { get; set; } = new List<Image>();
         /// <summary>
         /// 
         /// </summary>
-        public ICollection<UserPermission> UserPermissions = new List<UserPermission>();
+        public ICollection<UserPermission>? UserPermissions { get; set; } = new List<UserPermission>();
         /// <summary>
         /// 
         /// </summary>
-        public ICollection<ProfileDancer> ProfileDancers = new List<ProfileDancer>();
+        public ProfileDancer? ProfileDancers { get; set; } = new ProfileDancer();
         /// <summary>
         /// 
         /// </summary>
-        public ICollection<CouplesEvent_Date> CouplesEventsHost = new List<CouplesEvent_Date>();
+        public ICollection<CouplesEvent_Date>? CouplesEventsHost { get; set; } = new List<CouplesEvent_Date>();
         /// <summary>
         /// 
         /// </summary>
-        public ICollection<CouplesEvent_Date> CouplesEventsInvited = new List<CouplesEvent_Date>();
+        public ICollection<CouplesEvent_Date>? CouplesEventsInvited { get; set; } = new List<CouplesEvent_Date>();
         /// <summary>
         /// 
         /// </summary>
-        public ICollection<TypeEvent_User> TypeEventsUsers = new List<TypeEvent_User>();
+        public ICollection<TypeEvent_User>? TypeEventsUsers { get; set; } = new List<TypeEvent_User>();
         /// <summary>
         /// 
         /// </summary>
-        public ICollection<WaitList> WaitLists = new List<WaitList>();
+        public ICollection<WaitList>? WaitLists { get; set; } = new List<WaitList>();
         /// <summary>
         /// 
-        /// </summary>
-        public ICollection<Event> EventsCreated = new List<Event>();
+        /// </summary>{ get; set; }
+        public ICollection<Event>? EventsCreated = new List<Event>();
 
 
     }

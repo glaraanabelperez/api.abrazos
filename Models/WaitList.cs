@@ -10,9 +10,9 @@ namespace Models
         public int EventId_FK { get; set; }
         public int State { get; set; }
 
-        public Event Event = new Event();
+        public Event Event { get; set; } = new Event();
 
-        public User User = new User();
+        public User User { get; set; } = new User();
 
 
     }

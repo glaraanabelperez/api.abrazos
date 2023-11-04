@@ -4,12 +4,8 @@ using Abrazos.Persistence.Database;
 using Abrazos.Services.Dto;
 using Abrazos.Services.Interfaces;
 using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Drawing.Printing;
-using System.Linq;
-using System.Xml.Linq;
+
 
 namespace Abrazos.Services
 {
