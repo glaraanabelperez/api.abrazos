@@ -56,7 +56,7 @@ namespace Abrazos.Persistence.Database.Configurations
 
 
             builder.HasMany(e => e.UserPermissions)
-                .WithOne()
+                .WithOne(u => u.User)
                 .HasForeignKey(e => e.UserId_FK);
 
 

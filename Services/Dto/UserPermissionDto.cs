@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using System.ComponentModel.DataAnnotations;
 
-namespace Models
+namespace Abrazos.Services.Dto
 {
-    public class UserPermission
+    public class UserPermissionDto
     {
         public int UserPermissionId { get; set; }
         public int UserId_FK { get; set; }
         public int Permission_FK { get; set; }
-        public User? User { get; set; }
-        public Permission? Permission { get; set; }
+        public UserDto? User { get; set; }
+        public PermissionDto? Permission { get; set; }
     }
 }

@@ -49,7 +49,7 @@ namespace Models
         /// <summary>
         /// 
         /// </summary>
-        public byte UserState { get; set; }
+        public bool UserState { get; set; }
 
 
         /// <summary>
@@ -60,10 +60,16 @@ namespace Models
         /// 
         /// </summary>
         public ICollection<Image>? Images { get; set; } = new List<Image>();
+
         /// <summary>
         /// 
         /// </summary>
         public ICollection<UserPermission>? UserPermissions { get; set; } = new List<UserPermission>();
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public ICollection<Permission>? Permissions { get; set; } = new List<Permission>();
+
         /// <summary>
         /// 
         /// </summary>

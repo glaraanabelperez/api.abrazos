@@ -9,13 +9,14 @@ namespace Abrazos.Persistence.Database.Configurations
         public void Configure(EntityTypeBuilder<UserPermission> builder)
         {
             builder.HasKey(e => e.UserPermissionId);
-            builder.ToTable("UserPermission");
+            builder.ToTable("UserPermissions");
             builder.Property(e => e.UserPermissionId)
                 .HasColumnType("int")
                 .HasColumnName("UserPermissionId");
 
             builder.Property(e => e.Permission_FK)
               .HasColumnName("Permission_FK");
+
             builder.Property(e => e.UserId_FK)
                 .HasColumnName("UserId_FK");
 
@@ -24,7 +25,7 @@ namespace Abrazos.Persistence.Database.Configurations
                 .HasForeignKey(u => u.UserId_FK);
 
             builder.HasOne(u => u.Permission)
-                .WithMany()
+                .WithMany(up => up.UserPermissions)
                 .HasForeignKey(u => u.Permission_FK);
         }
     }

@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using System.ComponentModel.DataAnnotations;
 
-namespace Models
+namespace Abrazos.Services.Dto
 {
-    public class Country
+    public class CountryDto
     {
         public int CountryId { get; set; }
         public string Name { get; set; } = null!;
 
-        public ICollection<City> Cities { get; set; } = new List<City>();
+        public ICollection<CityDto> Cities { get; set; } = new List<CityDto>();
 
     }
 }

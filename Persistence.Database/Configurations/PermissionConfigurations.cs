@@ -9,7 +9,7 @@ namespace Abrazos.Persistence.Database.Configurations
         public void Configure(EntityTypeBuilder<Permission> builder)
         {
             builder.HasKey(e => e.PermissionId);
-            builder.ToTable("Permission");
+            builder.ToTable("Permissions");
             builder.Property(e => e.PermissionId)
                 .HasColumnType("int")
                 .HasColumnName("PermissionId");

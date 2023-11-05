@@ -4,25 +4,64 @@ using Abrazos.Persistence.Database;
 using Abrazos.Services.Dto;
 using Abrazos.Services.Interfaces;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-
+using System;
+using Utils;
 
 namespace Abrazos.Services
 {
     public class UserQueryService :IUserQueryService
     {
         private readonly IMapper _mapper;
+        private readonly ApplicationDbContext _context;
         ILogger<UserQueryService> _logger;
 
         public UserQueryService(ApplicationDbContext context, ILogger<UserQueryService> logger, IMapper mapper)
         {
             _mapper = mapper;
+            _context = context;
             _logger = logger;
         }
        
-        public Task<DataCollection<UserDto>> GetAllAsync(int page, int take, string? name, string? userName, string? lastName, string? name_, byte? userStates)
+        public async Task<DataCollection<UserDto>> GetAllAsync(
+            int page = 1, 
+            int take = 500, 
+            string? name = null, 
+            string? userName = null, 
+            bool? userStates = null, 
+            int? danceLevel = null,
+            int? danceRol = null,
+            int? evenType = null
+            )
         {
-            throw new NotImplementedException();
+            var queryable = await _context.User
+                           .Include(a => a.UserPermissions)
+                               .ThenInclude(perm => perm.Permission)
+                           .Include(a => a.ProfileDancers)
+                               .ThenInclude(details => details.DanceRol)
+                           .Include(a => a.ProfileDancers)
+                               .ThenInclude(details => details.DanceLevel)
+                            .Include(tyeu => tyeu.TypeEventsUsers)
+                                .ThenInclude(tye => tye.TypeEvent)
+
+                  .Where(x => name == null || !name.Any() || name.Contains(x.Name))
+                  .Where(x => userName == null || !userName.Any() || userName.Contains(x.UserName))
+                  .Where(x => userStates == null || (x.UserState != null && x.UserState == userStates))
+                  .Where(x => danceLevel == null || (x.ProfileDancerId_FK != null && x.ProfileDancers.DanceLevel.DanceLevelId == danceLevel))
+                  .Where(x => danceRol == null || (x.ProfileDancerId_FK != null && x.ProfileDancers.DanceRol.DanceRolId == danceRol))
+                  .Where(x => evenType == null || (x.TypeEventsUsers != null && x.TypeEventsUsers.First().TypeEvent.TypeEventId == evenType))
+
+                  .OrderByDescending(x => x.UserId)
+                  .GetPagedAsync(page, take);
+                  //.Skip((page - 1) * take)
+                  //.Take(take)
+                  //.ToListAsync();
+
+            var result = _mapper.Map<DataCollection<UserDto>>(queryable);
+
+
+            return null;
         }
 
         public async Task<UserDto> GatAsync(long userId)
@@ -30,5 +69,7 @@ namespace Abrazos.Services
            
             return null;
         }
+
+
     }
 }

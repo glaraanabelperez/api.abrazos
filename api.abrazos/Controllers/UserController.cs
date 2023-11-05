@@ -1,8 +1,4 @@
-using Abrazos.Persistence.Database;
-using Abrazos.ServiceEventHandler.Commands;
 using Abrazos.Services.Interfaces;
-using Abrazos.ServicesEvenetHandler.Intefaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -11,13 +7,13 @@ namespace api.abrazos.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    //[Authorize]
     public class UserController : ControllerBase
     {
         private readonly IUserQueryService _userService;
         //private readonly IUserCreateCommandHandler _userCreateHandler;
 
-        public UserController(
-              IUserQueryService IUserService
+        public UserController(IUserQueryService IUserService
               //IUserCreateCommandHandler IUserCreatehandler
         )
         {
@@ -25,15 +21,53 @@ namespace api.abrazos.Controllers
             //_userCreateHandler = IUserCreatehandler;
         }
 
+        //[HttpGet]
+        //public async Task<IActionResult> GetUserById(int userId)
+        //{
+        //    //var user = await _userService.GatAsync(userId);
+
+        //    return null;
+
+        //}
+        /// <summary>
+        /// Return All Users by some filters.
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="take"></param>
+        /// <param name="name"></param>
+        /// <param name="userName"></param>
+        /// <param name="userStates"></param>
+        /// <param name="danceLevel"></param>
+        /// <param name="danceRol"></param>
+        /// <param name="evenType"></param>
+        /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> GetUserById(int userId)
+        public async Task<IActionResult> GetAll(
+             int page = 1,
+            int take = 500,
+            string? name = null,
+            string? userName = null,
+            bool? userStates = null,
+            int? danceLevel = null,
+            int? danceRol = null,
+            int? evenType = null
+        )
         {
-            //var user = await _userService.GatAsync(userId);
 
-            return null;
+            var users = await _userService.GetAllAsync(
+              page,
+              take,
+              name,
+              userName,
+              userStates,
+              danceLevel,
+              danceRol,
+              evenType
+               );
 
+            return Ok(users);
         }
 
-        
+
     }
 }

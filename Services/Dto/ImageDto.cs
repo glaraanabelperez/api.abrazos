@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using System.ComponentModel.DataAnnotations;
 
-namespace Models
+namespace Abrazos.Services.Dto
 {
-    public class Image
+    public class ImageDto
     {
         public int ImageId { get; set; }
         public int UserId_fk { get; set; }
