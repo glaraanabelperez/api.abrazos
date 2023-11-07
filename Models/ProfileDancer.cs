@@ -9,7 +9,7 @@
         public DanceRol? DanceRol { get; }
         public DanceLevel? DanceLevel { get; }
 
-        public ICollection<User>? Users;
+        public ICollection<User>? Users { get; } = new List<User>();
 
     }
 }

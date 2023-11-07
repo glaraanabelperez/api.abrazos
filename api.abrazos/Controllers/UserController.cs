@@ -21,14 +21,15 @@ namespace api.abrazos.Controllers
             //_userCreateHandler = IUserCreatehandler;
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> GetUserById(int userId)
-        //{
-        //    //var user = await _userService.GatAsync(userId);
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetUserById(int userId)
+        {
+            var user = await _userService.GatAsync(userId);
 
-        //    return null;
+            return Ok(user);
 
-        //}
+        }
+
         /// <summary>
         /// Return All Users by some filters.
         /// </summary>
@@ -43,7 +44,7 @@ namespace api.abrazos.Controllers
         /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> GetAll(
-             int page = 1,
+            int page = 1,
             int take = 500,
             string? name = null,
             string? userName = null,

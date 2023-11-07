@@ -6,7 +6,9 @@ using Abrazos.Services.Interfaces;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Models;
 using System;
+using System.Xml.Linq;
 using Utils;
 
 namespace Abrazos.Services
@@ -52,7 +54,7 @@ namespace Abrazos.Services
                   .Where(x => danceRol == null || (x.ProfileDancerId_FK != null && x.ProfileDancers.DanceRol.DanceRolId == danceRol))
                   .Where(x => evenType == null || (x.TypeEventsUsers != null && x.TypeEventsUsers.First().TypeEvent.TypeEventId == evenType))
 
-                  .OrderByDescending(x => x.UserId)
+                  .OrderByDescending(x => x.Name)
                   .GetPagedAsync(page, take);
                   //.Skip((page - 1) * take)
                   //.Take(take)
@@ -61,13 +63,31 @@ namespace Abrazos.Services
             var result = _mapper.Map<DataCollection<UserDto>>(queryable);
 
 
-            return null;
+            return result;
         }
 
         public async Task<UserDto> GatAsync(long userId)
         {
-           
-            return null;
+
+            var queryable = await _context.User
+                          .Include(a => a.UserPermissions)
+                              .ThenInclude(perm => perm.Permission)
+                          .Include(a => a.ProfileDancers)
+                              .ThenInclude(details => details.DanceRol)
+                          .Include(a => a.ProfileDancers)
+                              .ThenInclude(details => details.DanceLevel)
+                          .Include(tyeu => tyeu.TypeEventsUsers)
+                            .ThenInclude(tye => tye.TypeEvent)
+                        .Include(ad => ad.Address)
+            //.ThenInclude(tye => tye.TypeEvent)
+            .Where(x => x.UserId==userId)
+            .SingleOrDefaultAsync();
+
+
+            var result = _mapper.Map<UserDto>(queryable);
+
+
+            return result;
         }
 
 
