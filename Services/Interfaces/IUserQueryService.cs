@@ -19,7 +19,7 @@ namespace Abrazos.Services.Interfaces
                                               );
 
         Task<ResultApp> GatAsync(long userId);
-        Task<LoginResultDto>  LoginAsync(string email, string pass);
+        Task<ResultApp>  LoginAsync(string email, string pass);
     }
 
 }

@@ -86,10 +86,16 @@ namespace Abrazos.Services
                 //.ThenInclude(tye => tye.TypeEvent)
                 .SingleOrDefaultAsync(x => x.UserId == userId));
 
-
-                resultApp.objectResult = _mapper.Map<UserDto>(queryable);
-                _logger.LogWarning(queryable.ToString());
-
+                if (queryable != null)
+                {
+                    resultApp.Succeeded = true;
+                    resultApp.objectResult = _mapper.Map<UserDto>(queryable);
+                    _logger.LogWarning(queryable.ToString());
+                }
+                else
+                {
+                    resultApp.message = "Without Data";
+                }
 
                 return resultApp;
 
@@ -106,10 +112,10 @@ namespace Abrazos.Services
 
         }
 
-        public async Task<LoginResultDto> LoginAsync(string email, string pass)
+        public async Task<ResultApp> LoginAsync(string email, string pass)
         {
 
-            LoginResultDto res = new LoginResultDto();
+            ResultApp res = new ResultApp();
             try
             {
                 var queryable = await _context.User

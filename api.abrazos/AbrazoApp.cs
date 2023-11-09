@@ -1,6 +1,6 @@
 namespace api.abrazos
 {
-    public class WeatherForecast
+    public class AbrazoApp
     {
         public DateTime Date { get; set; }
 
