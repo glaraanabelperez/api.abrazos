@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using System.ComponentModel.DataAnnotations;
 
-namespace ServiceEventHandler.CreateCommand
+namespace ServiceEventHandler.Command.CreateCommand
 {
-    public class TypeEvent_UserCreateCommand
+    public class UserPermissionCreateCommand
     {
         [Required]
-        public int TypeEventId_FK { get; set; }
-        [Required]
         public int UserId_FK { get; set; }
+        [Required]
+        public int Permission_FK { get; set; }
 
     }
 }

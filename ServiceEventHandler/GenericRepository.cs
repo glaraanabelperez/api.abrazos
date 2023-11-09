@@ -1,13 +1,13 @@
 ﻿
 
 using Abrazos.Persistence.Database;
-using Abrazos.ServiceEventHandler.Commands;
 using Abrazos.Services.Dto;
 using Abrazos.ServicesEvenetHandler.Intefaces;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
 using ServiceEventHandler.Command;
+using Utils;
 
 namespace Abrazos.ServiceEventHandler
 {
@@ -29,7 +29,7 @@ namespace Abrazos.ServiceEventHandler
 
             using (IDbContextTransaction transac = await _dbContext.Database.BeginTransactionAsync())
             {
-                ResultApp res= new ResultApp();
+                ResultApp res = new ResultApp();
                 try
                 {
                     var dbSet = _dbContext.Set<T>();

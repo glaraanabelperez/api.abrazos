@@ -1,6 +1,6 @@
-﻿using Abrazos.ServiceEventHandler.Commands;
-using ServiceEventHandler.Command;
+﻿using ServiceEventHandler.Command;
 using System;
+using Utils;
 
 namespace Abrazos.ServicesEvenetHandler.Intefaces
 {

@@ -1,7 +1,7 @@
 ﻿using Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace Abrazos.ServiceEventHandler.Commands
+namespace ServiceEventHandler.Command.CreateCommand
 {
     public class PerfilDancerCreateCommand
     {

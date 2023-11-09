@@ -1,10 +1,10 @@
 using Abrazos.Persistence.Database;
-using Abrazos.ServiceEventHandler.Commands;
 using Abrazos.Services.Interfaces;
 using Abrazos.ServicesEvenetHandler.Intefaces;
 using Microsoft.AspNetCore.Mvc;
-
-
+using ServiceEventHandler.Command;
+using ServiceEventHandler.Command.CreateCommand;
+using Utils;
 
 namespace api.abrazos.Controllers
 {
@@ -12,10 +12,10 @@ namespace api.abrazos.Controllers
     [Route("[controller]")]
     public class RegisterController : ControllerBase
     {
-        private readonly IUserCreateCommandHandler _userCreateHandler;
+        private readonly IUserCommandHandler _userCreateHandler;
 
         public RegisterController(
-          IUserCreateCommandHandler IUserCreatehandler
+          IUserCommandHandler IUserCreatehandler
         )
         {
             _userCreateHandler = IUserCreatehandler;
@@ -29,7 +29,7 @@ namespace api.abrazos.Controllers
                 return BadRequest(ModelState);
             }
 
-            var result = await _userCreateHandler.AddUser(User);
+            var  result = await _userCreateHandler.AddUser(User);
             return result?.Succeeded ?? false
                     ? Ok(result)
                     : BadRequest(result?.message);

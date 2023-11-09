@@ -1,14 +1,15 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using System.ComponentModel.DataAnnotations;
 
-namespace ServiceEventHandler.CreateCommand
+namespace ServiceEventHandler.Command.CreateCommand
 {
-    public class UserPermissionCreateCommand
+    public class WaitListCreateCommand
     {
         [Required]
         public int UserId_FK { get; set; }
         [Required]
-        public int Permission_FK { get; set; }
-      
+        public int EventId_FK { get; set; }
+        public int State { get; set; }
+
     }
 }

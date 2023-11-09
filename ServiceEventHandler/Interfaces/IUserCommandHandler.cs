@@ -1,10 +1,11 @@
-﻿using Abrazos.ServiceEventHandler.Commands;
-using ServiceEventHandler.Command;
+﻿using ServiceEventHandler.Command;
+using ServiceEventHandler.Command.CreateCommand;
 using System;
+using Utils;
 
 namespace Abrazos.ServicesEvenetHandler.Intefaces
 {
-    public interface IUserCreateCommandHandler
+    public interface IUserCommandHandler
     {
         public Task<ResultApp> AddUser(UserCreateCommand entity);
 

@@ -7,6 +7,7 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Models;
+using ServicesQueries.Auth;
 using System;
 using System.Xml.Linq;
 using Utils;
@@ -66,28 +67,81 @@ namespace Abrazos.Services
             return result;
         }
 
-        public async Task<UserDto> GatAsync(long userId)
+        public async Task<ResultApp> GatAsync(long userId)
+        {
+            ResultApp resultApp = new ResultApp();
+            try
+            {
+
+                var queryable = (await _context.User
+                              .Include(a => a.UserPermissions)
+                                  .ThenInclude(perm => perm.Permission)
+                              .Include(a => a.ProfileDancers)
+                                  .ThenInclude(details => details.DanceRol)
+                              .Include(a => a.ProfileDancers)
+                                  .ThenInclude(details => details.DanceLevel)
+                              .Include(tyeu => tyeu.TypeEventsUsers)
+                                .ThenInclude(tye => tye.TypeEvent)
+                            .Include(ad => ad.Address)
+                //.ThenInclude(tye => tye.TypeEvent)
+                .SingleOrDefaultAsync(x => x.UserId == userId));
+
+
+                resultApp.objectResult = _mapper.Map<UserDto>(queryable);
+                _logger.LogWarning(queryable.ToString());
+
+
+                return resultApp;
+
+            }
+            catch (System.Exception ex)
+            {
+                string value = ((ex.InnerException != null) ? ex.InnerException!.Message : ex.Message);
+                _logger.LogWarning(value);
+                resultApp.errors = value;
+                resultApp.Succeeded = false;
+                return resultApp;
+            }
+
+
+        }
+
+        public async Task<LoginResultDto> LoginAsync(string email, string pass)
         {
 
-            var queryable = await _context.User
-                          .Include(a => a.UserPermissions)
-                              .ThenInclude(perm => perm.Permission)
-                          .Include(a => a.ProfileDancers)
-                              .ThenInclude(details => details.DanceRol)
-                          .Include(a => a.ProfileDancers)
-                              .ThenInclude(details => details.DanceLevel)
-                          .Include(tyeu => tyeu.TypeEventsUsers)
-                            .ThenInclude(tye => tye.TypeEvent)
-                        .Include(ad => ad.Address)
-            //.ThenInclude(tye => tye.TypeEvent)
-            .Where(x => x.UserId==userId)
-            .SingleOrDefaultAsync();
+            LoginResultDto res = new LoginResultDto();
+            try
+            {
+                var queryable = await _context.User
+                                     .Where(x => x.Email == email)
+                                     .Where(x => x.Pass == pass)
+                                     .SingleOrDefaultAsync();
 
+                if (queryable != null)
+                {
+                    res.Succeeded = true;
+                    res.message = "Successful login";
+                    return res;
+                }
+                else
+                {
+                    res.Succeeded = false;
+                    res.errors = "The user is not registered";
+                    return res;
+                }
 
-            var result = _mapper.Map<UserDto>(queryable);
+                //_logger.LogWarning(res_.Metadata.ToString());
 
+            }
+            catch (System.Exception ex)
+            {
+                string value = ((ex.InnerException != null) ? ex.InnerException!.Message : ex.Message);
+                _logger.LogWarning(value);
+                res.Succeeded = false;
+                res.errors = "Error in Login";
+                return res;
+            }
 
-            return result;
         }
 
 

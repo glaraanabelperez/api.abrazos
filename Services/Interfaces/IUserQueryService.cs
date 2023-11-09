@@ -1,4 +1,5 @@
 ﻿using Abrazos.Services.Dto;
+using ServicesQueries.Auth;
 using System.ComponentModel.DataAnnotations;
 using Utils;
 
@@ -17,9 +18,8 @@ namespace Abrazos.Services.Interfaces
                                                     int? evenType = null
                                               );
 
-        Task<UserDto> GatAsync(long userId);
-
-
+        Task<ResultApp> GatAsync(long userId);
+        Task<LoginResultDto>  LoginAsync(string email, string pass);
     }
 
 }

@@ -1,7 +1,6 @@
-﻿using ServiceEventHandler.CreateCommand;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Abrazos.ServiceEventHandler.Commands
+namespace ServiceEventHandler.Command.CreateCommand
 {
     public class UserCreateCommand
     {

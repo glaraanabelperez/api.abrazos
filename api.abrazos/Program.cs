@@ -26,7 +26,7 @@ builder.Services.AddHealthChecks();
 // Add services to the container.
 builder.Services.AddTransient<AbrazosDbContext, ApplicationDbContext>();
 builder.Services.AddTransient<IGenericRepository, GenericRepository>();
-builder.Services.AddTransient<IUserCreateCommandHandler, UserCreateCommandHandler>();
+builder.Services.AddTransient<IUserCommandHandler, UserCommandHandler>();
 builder.Services.AddTransient<IUserQueryService, UserQueryService>();
 
 
@@ -54,8 +54,8 @@ app.UseSwaggerUI();
 app.UseRouting();
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 //app.UseEndpoints(endpoints =>

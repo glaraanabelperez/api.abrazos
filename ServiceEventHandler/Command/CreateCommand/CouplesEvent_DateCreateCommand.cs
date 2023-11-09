@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using System.ComponentModel.DataAnnotations;
 
-namespace ServiceEventHandler.CreateCommand
+namespace ServiceEventHandler.Command.CreateCommand
 {
     public class CouplesEvent_DateCtreateCommand
     {

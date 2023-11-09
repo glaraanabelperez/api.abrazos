@@ -1,7 +1,6 @@
 ﻿
 
 using Abrazos.Persistence.Database;
-using Abrazos.ServiceEventHandler.Commands;
 using Abrazos.Services.Dto;
 using Abrazos.ServicesEvenetHandler.Intefaces;
 using AutoMapper;
@@ -9,19 +8,21 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
 using Models;
 using ServiceEventHandler.Command;
+using ServiceEventHandler.Command.CreateCommand;
 using System.Net.NetworkInformation;
+using Utils;
 
 namespace Abrazos.ServiceEventHandler
 {
-    public class UserCreateCommandHandler: IUserCreateCommandHandler
+    public class UserCommandHandler: IUserCommandHandler
     {
-        private readonly ILogger<UserCreateCommandHandler> _logger;
+        private readonly ILogger<UserCommandHandler> _logger;
         private readonly ApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
         public IGenericRepository command;
 
-        public UserCreateCommandHandler(ApplicationDbContext dbContext, IGenericRepository command, 
-            ILogger<UserCreateCommandHandler> logger, IMapper mapper)
+        public UserCommandHandler(ApplicationDbContext dbContext, IGenericRepository command, 
+            ILogger<UserCommandHandler> logger, IMapper mapper)
         {
             _dbContext = dbContext;
             this.command = command;

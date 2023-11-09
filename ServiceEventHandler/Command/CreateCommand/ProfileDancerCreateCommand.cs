@@ -1,8 +1,6 @@
-﻿using Abrazos.ServiceEventHandler.Commands;
-using Models;
-using System.ComponentModel.DataAnnotations;
+﻿
 
-namespace ServiceEventHandler.CreateCommand
+namespace ServiceEventHandler.Command.CreateCommand
 {
     public class ProfileDancerCreateCommand
     {

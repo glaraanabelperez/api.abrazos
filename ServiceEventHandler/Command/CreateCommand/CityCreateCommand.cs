@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using System.ComponentModel.DataAnnotations;
 
-namespace ServiceEventHandler.CreateCommand
+namespace ServiceEventHandler.Command.CreateCommand
 {
-    public class ImageCreateCommand
+    public class CityCreateCommand
     {
         [Required]
-        public int UserId_fk { get; set; }
+        public int CountryId_FK { get; set; }
         [Required]
         [StringLength(255, MinimumLength = 8)]
         public string Name { get; set; } = string.Empty;
-       
+
     }
 }

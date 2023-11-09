@@ -1,8 +1,7 @@
 ﻿using Models;
-using ServiceEventHandler.CreateCommand;
 using System.ComponentModel.DataAnnotations;
 
-namespace Abrazos.ServiceEventHandler.Commands
+namespace ServiceEventHandler.Command.CreateCommand
 {
     public class DanceRolCreateCommand
     {
