@@ -21,7 +21,7 @@ namespace ServicesQueries.Auth
             IOptionsMonitor<AuthenticationSchemeOptions> options,
             ILoggerFactory logger,
             UrlEncoder encoder,
-            ISystemClock clock, 
+            ISystemClock clock,
             IUserQueryService userService
             ) : base(options, logger, encoder, clock)
         {
@@ -63,7 +63,7 @@ namespace ServicesQueries.Auth
                     return AuthenticateResult.Fail("Invalid Email's format");
                 }
 
-               
+
             }
             catch (Exception ex)
             {

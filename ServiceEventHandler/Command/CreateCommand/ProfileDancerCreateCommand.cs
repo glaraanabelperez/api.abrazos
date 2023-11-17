@@ -1,5 +1,7 @@
 ﻿
 
+using Models;
+
 namespace ServiceEventHandler.Command.CreateCommand
 {
     public class ProfileDancerCreateCommand
@@ -8,5 +10,7 @@ namespace ServiceEventHandler.Command.CreateCommand
         public int DanceRol_FK { get; set; }
         public double Height { get; set; }
 
+        public DanceRolCreateCommand? DanceRol { get; }
+        public DanceLevelCreateCommand? DanceLevel { get; }
     }
 }

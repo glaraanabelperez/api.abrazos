@@ -10,10 +10,16 @@ namespace Abrazos.ServicesEvenetHandler.Mapper
     {
         public AutomapperToCommand()
         {
-            //-- Users -----------
+            //-- Users  -----------
 
-            CreateMap<UserCreateCommand, Models.User>().ReverseMap();
-            CreateMap<DataCollection<UserCreateCommand>, DataCollection<Models.User>>().ForMember(dest => dest.Items, sour => sour.MapFrom(s => s.Items)).ReverseMap();
+            CreateMap<UserCreateCommand, Models.User>();
+            CreateMap<DataCollection<UserCreateCommand>, DataCollection<Models.User>>().ForMember(dest => dest.Items, sour => sour.MapFrom(s => s.Items));
+
+            CreateMap<UserUpdateCommand, Models.User>();
+
+            //-- Profile  -----------
+            CreateMap<ProfileDancerCreateCommand, Models.ProfileDancer>();
+            CreateMap<ProfileDancerUpdateCommand, Models.ProfileDancer>();
 
         }
 

@@ -72,7 +72,7 @@ namespace Abrazos.Services.Dto
         /// <summary>
         /// 
         /// </summary>
-        public ProfileDancerDto? ProfileDancers { get; set; } = new ProfileDancerDto();
+        public ProfileDancerDto? ProfileDancers { get; set; } 
         ///// <summary>
         ///// 
         ///// </summary>

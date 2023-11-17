@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using Models;
 using ServicesQueries.Auth;
 using System;
+using System.Linq;
 using System.Xml.Linq;
 using Utils;
 

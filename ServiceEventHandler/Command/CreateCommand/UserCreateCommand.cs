@@ -6,19 +6,19 @@ namespace ServiceEventHandler.Command.CreateCommand
     {
         [Required]
         [MaxLength(250)]
-        public string Name { get; set; } = string.Empty;
+        public string Name { get; set; } = null!;
         [Required]
         [MaxLength(250)]
-        public string LastName { get; set; } = string.Empty;
+        public string LastName { get; set; } 
         [Required]
         [MaxLength(250)]
-        public string UserName { get; set; } = string.Empty;
+        public string UserName { get; set; } 
         [Required]
         [MaxLength(50)]
-        public string Pass { get; set; } = string.Empty;
+        public string Pass { get; set; }
         [Required]
         [MaxLength(100)]
-        public string Email { get; set; } = string.Empty;
+        public string Email { get; set; } = null!;
         public int? Age { get; set; }
         [MaxLength(250)]
         public string? Celphone { get; set; }

@@ -65,13 +65,14 @@ namespace Abrazos.ServiceEventHandler
             {
                 ResultApp res = new ResultApp();
                 try
-                {
+                {                    
+
                     var dbSet = _dbContext.Set<T>();
-                    var res_ = dbSet.Attach(entity);
+                    var entyResult = dbSet.Attach(entity);
                     _dbContext.Entry(entity).State = EntityState.Modified;
                     _dbContext.SaveChanges();
 
-                    res.objectResult = _mapper.Map<UserDto>(res_.Entity);
+                    res.objectResult = _mapper.Map<UserDto>(entyResult.Entity);
                     await transac.CommitAsync();
 
                     //_logger.LogWarning(res_.Metadata.ToString());

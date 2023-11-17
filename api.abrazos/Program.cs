@@ -30,8 +30,6 @@ builder.Services.AddTransient<IUserCommandHandler, UserCommandHandler>();
 builder.Services.AddTransient<IUserQueryService, UserQueryService>();
 
 
-builder.Services.AddAuthentication("BasicAuthentication")
-    .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
 
 
 //Config Mapper
@@ -45,8 +43,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddAuthentication("BasicAuthentication")
+    .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
+
 
 var app = builder.Build();
+
 
 app.UseSwagger();
 app.UseSwaggerUI();

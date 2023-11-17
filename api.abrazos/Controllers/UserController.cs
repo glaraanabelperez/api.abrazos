@@ -2,8 +2,7 @@ using Abrazos.Services.Interfaces;
 using Abrazos.ServicesEvenetHandler.Intefaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
-
+using ServiceEventHandler.Command.CreateCommand;
 
 namespace api.abrazos.Controllers
 {
@@ -69,7 +68,8 @@ namespace api.abrazos.Controllers
             return Ok(users);
         }
 
-        [HttpPost]
+        [HttpPut]
+        //[Route("/updateUser")]
         public async Task<IActionResult> UpdateUser(UserUpdateCommand User)
         {
             if (!ModelState.IsValid)
@@ -77,7 +77,7 @@ namespace api.abrazos.Controllers
                 return BadRequest(ModelState);
             }
 
-            var result = await _userCommandHandler.AddUser(User);
+            var result = await _userCommandHandler.UpdateUser(User);
             return result?.Succeeded ?? false
                     ? Ok(result)
                     : BadRequest(result?.message);
