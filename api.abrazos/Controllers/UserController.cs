@@ -1,4 +1,5 @@
 using Abrazos.Services.Interfaces;
+using Abrazos.ServicesEvenetHandler.Intefaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,14 +13,12 @@ namespace api.abrazos.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserQueryService _userService;
-        //private readonly IUserCreateCommandHandler _userCreateHandler;
+        private readonly IUserCommandHandler _userCommandHandler;
 
-        public UserController(IUserQueryService IUserService
-              //IUserCreateCommandHandler IUserCreatehandler
-        )
+        public UserController(IUserQueryService IUserService,IUserCommandHandler userCommandHandler)
         {
             _userService = IUserService;
-            //_userCreateHandler = IUserCreatehandler;
+            _userCommandHandler = userCommandHandler;
         }
 
         [HttpGet("{userId}")]
@@ -70,6 +69,20 @@ namespace api.abrazos.Controllers
             return Ok(users);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> UpdateUser(UserUpdateCommand User)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await _userCommandHandler.AddUser(User);
+            return result?.Succeeded ?? false
+                    ? Ok(result)
+                    : BadRequest(result?.message);
+
+        }
 
     }
 }

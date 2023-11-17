@@ -4,6 +4,7 @@ using Abrazos.Persistence.Database;
 using Abrazos.Services.Dto;
 using Abrazos.ServicesEvenetHandler.Intefaces;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
 using ServiceEventHandler.Command;
@@ -39,7 +40,7 @@ namespace Abrazos.ServiceEventHandler
                     res.objectResult = _mapper.Map<UserDto>(res_.Entity);
                     await transac.CommitAsync();
 
-                    _logger.LogWarning(res_.Metadata.ToString());
+                    //_logger.LogWarning(res_.Metadata.ToString());
                     res.Succeeded = true;
                     res.message = "Successful registration";
                     return res;
@@ -58,16 +59,43 @@ namespace Abrazos.ServiceEventHandler
 
         }
 
-        public void Delete<T>(int id) where T : class
+        public async Task<ResultApp> Update<T>(T entity) where T : class
+        {
+            using (IDbContextTransaction transac = await _dbContext.Database.BeginTransactionAsync())
+            {
+                ResultApp res = new ResultApp();
+                try
+                {
+                    var dbSet = _dbContext.Set<T>();
+                    var res_ = dbSet.Attach(entity);
+                    _dbContext.Entry(entity).State = EntityState.Modified;
+                    _dbContext.SaveChanges();
+
+                    res.objectResult = _mapper.Map<UserDto>(res_.Entity);
+                    await transac.CommitAsync();
+
+                    //_logger.LogWarning(res_.Metadata.ToString());
+                    res.Succeeded = true;
+                    res.message = "Successful Edition";
+                    return res;
+                }
+                catch (System.Exception ex)
+                {
+                    await transac.RollbackAsync();
+                    string value = ((ex.InnerException != null) ? ex.InnerException!.Message : ex.Message);
+                    _logger.LogWarning(value);
+                    res.Succeeded = false;
+                    res.message = "Error al Registrar el Usuario";
+                    return res;
+                }
+
+            }
+        }
+
+        public Task<ResultApp> Delete<T>(int id) where T : class
         {
             throw new NotImplementedException();
         }
-
-        public void Update<T>(T entity) where T : class
-        {
-            throw new NotImplementedException();
-        }
-
     }
 }
 

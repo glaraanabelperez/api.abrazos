@@ -9,6 +9,8 @@ namespace Abrazos.ServicesEvenetHandler.Intefaces
     {
         public Task<ResultApp> AddUser(UserCreateCommand entity);
 
+        public Task<ResultApp> UpdateUser(UserCreateCommand entity);
+
     }
 }
 

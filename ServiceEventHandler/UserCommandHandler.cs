@@ -18,7 +18,7 @@ namespace Abrazos.ServiceEventHandler
     {
         private readonly ILogger<UserCommandHandler> _logger;
         private readonly ApplicationDbContext _dbContext;
-        private readonly IMapper _mapper;
+        //private readonly IMapper _mapper;
         public IGenericRepository command;
 
         public UserCommandHandler(ApplicationDbContext dbContext, IGenericRepository command, 
@@ -36,6 +36,14 @@ namespace Abrazos.ServiceEventHandler
 
            ResultApp res = await this.command.Add<User>(MapToUserEntity(entity));
            return res ;
+
+        }
+
+        public async Task<ResultApp> UpdateUser(UserUpdateCommand entity)
+        {
+
+            ResultApp res = await this.command.Update<User>(MapToUserEntity(entity));
+            return res;
 
         }
 

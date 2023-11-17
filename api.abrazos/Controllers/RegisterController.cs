@@ -12,13 +12,13 @@ namespace api.abrazos.Controllers
     [Route("[controller]")]
     public class RegisterController : ControllerBase
     {
-        private readonly IUserCommandHandler _userCreateHandler;
+        private readonly IUserCommandHandler _userCommandHandler;
 
         public RegisterController(
           IUserCommandHandler IUserCreatehandler
         )
         {
-            _userCreateHandler = IUserCreatehandler;
+            _userCommandHandler = IUserCreatehandler;
         }
 
         [HttpPost]
@@ -29,7 +29,7 @@ namespace api.abrazos.Controllers
                 return BadRequest(ModelState);
             }
 
-            var  result = await _userCreateHandler.AddUser(User);
+            var  result = await _userCommandHandler.AddUser(User);
             return result?.Succeeded ?? false
                     ? Ok(result)
                     : BadRequest(result?.message);
