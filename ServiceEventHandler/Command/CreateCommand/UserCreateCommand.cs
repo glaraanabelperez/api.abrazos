@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace ServiceEventHandler.Command.CreateCommand
 {
@@ -25,7 +26,7 @@ namespace ServiceEventHandler.Command.CreateCommand
         [MaxLength(250)]
         public string? AvatarImage { get; set; }
 
-        public ProfileDancerCreateCommand? ProfileDancerCreateCommand { get; set; } = new ProfileDancerCreateCommand();
+        public ProfileDancerCreateCommand? ProfileDancer { get; set; } = new ProfileDancerCreateCommand();
 
     }
 }

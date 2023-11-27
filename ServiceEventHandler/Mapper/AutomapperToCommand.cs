@@ -12,14 +12,13 @@ namespace Abrazos.ServicesEvenetHandler.Mapper
         {
             //-- Users  -----------
 
-            CreateMap<UserCreateCommand, Models.User>();
-            CreateMap<DataCollection<UserCreateCommand>, DataCollection<Models.User>>().ForMember(dest => dest.Items, sour => sour.MapFrom(s => s.Items));
+            //CreateMap<UserCreateCommand, Models.User>().ReverseMap();
+            //CreateMap<DataCollection<UserCreateCommand>, DataCollection<Models.User>>().ForMember(dest => dest.Items, sour => sour.MapFrom(s => s.Items));
+            //CreateMap<UserUpdateCommand, Models.User>();
 
-            CreateMap<UserUpdateCommand, Models.User>();
-
-            //-- Profile  -----------
-            CreateMap<ProfileDancerCreateCommand, Models.ProfileDancer>();
-            CreateMap<ProfileDancerUpdateCommand, Models.ProfileDancer>();
+            ////-- Profile  -----------
+            //CreateMap<ProfileDancerCreateCommand, Models.ProfileDancer>().ReverseMap();
+            //CreateMap<ProfileDancerUpdateCommand, Models.ProfileDancer>();
 
         }
 

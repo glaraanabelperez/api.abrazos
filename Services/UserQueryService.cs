@@ -42,9 +42,9 @@ namespace Abrazos.Services
             var queryable = await _context.User
                            .Include(a => a.UserPermissions)
                                .ThenInclude(perm => perm.Permission)
-                           .Include(a => a.ProfileDancers)
+                           .Include(a => a.ProfileDancer)
                                .ThenInclude(details => details.DanceRol)
-                           .Include(a => a.ProfileDancers)
+                           .Include(a => a.ProfileDancer)
                                .ThenInclude(details => details.DanceLevel)
                             .Include(tyeu => tyeu.TypeEventsUsers)
                                 .ThenInclude(tye => tye.TypeEvent)
@@ -52,15 +52,17 @@ namespace Abrazos.Services
                   .Where(x => name == null || !name.Any() || name.Contains(x.Name))
                   .Where(x => userName == null || !userName.Any() || userName.Contains(x.UserName))
                   .Where(x => userStates == null || (x.UserState != null && x.UserState == userStates))
-                  .Where(x => danceLevel == null || (x.ProfileDancerId_FK != null && x.ProfileDancers.DanceLevel.DanceLevelId == danceLevel))
-                  .Where(x => danceRol == null || (x.ProfileDancerId_FK != null && x.ProfileDancers.DanceRol.DanceRolId == danceRol))
+                  .Where(x => danceLevel == null || (x.ProfileDancerId_FK != null && x.ProfileDancer.DanceLevel.DanceLevelId == danceLevel))
+                  .Where(x => danceRol == null || (x.ProfileDancerId_FK != null && x.ProfileDancer.DanceRol.DanceRolId == danceRol))
                   .Where(x => evenType == null || (x.TypeEventsUsers != null && x.TypeEventsUsers.First().TypeEvent.TypeEventId == evenType))
 
                   .OrderByDescending(x => x.Name)
                   .GetPagedAsync(page, take);
-                  //.Skip((page - 1) * take)
-                  //.Take(take)
-                  //.ToListAsync();
+            //.Skip((page - 1) * take)
+            //.Take(take)
+            //.ToListAsync();
+
+            _logger.LogWarning(queryable.ToString());
 
             var result = _mapper.Map<DataCollection<UserDto>>(queryable);
 
@@ -77,9 +79,9 @@ namespace Abrazos.Services
                 var queryable = (await _context.User
                               .Include(a => a.UserPermissions)
                                   .ThenInclude(perm => perm.Permission)
-                              .Include(a => a.ProfileDancers)
+                              .Include(a => a.ProfileDancer)
                                   .ThenInclude(details => details.DanceRol)
-                              .Include(a => a.ProfileDancers)
+                              .Include(a => a.ProfileDancer)
                                   .ThenInclude(details => details.DanceLevel)
                               .Include(tyeu => tyeu.TypeEventsUsers)
                                 .ThenInclude(tye => tye.TypeEvent)

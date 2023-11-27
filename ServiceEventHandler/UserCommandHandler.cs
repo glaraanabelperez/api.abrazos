@@ -35,7 +35,7 @@ namespace Abrazos.ServiceEventHandler
         {
 
 
-            ResultApp res = await this.command.Add<User>(_mapper.Map<User>(entity));
+            ResultApp res = await this.command.Add<User>(MapToUserEntity(entity));
             return res ;
 
         }
@@ -44,7 +44,6 @@ namespace Abrazos.ServiceEventHandler
         {
             ResultApp res = null;
             var result = _dbContext.User
-                //.Include(u => u.ProfileDancers)
                 .FirstOrDefault(u => u.UserId == command.userId);
 
             if (result != null)
@@ -66,39 +65,31 @@ namespace Abrazos.ServiceEventHandler
             user.Name = (userCommand.Name != null && userCommand.Name != string.Empty) ? userCommand.Name : user.Name;
             user.Pass = (userCommand.Pass != null && userCommand.Pass != string.Empty )? userCommand.Pass : user.Pass;
 
-            //if (userCommand.ProfileDancerUpdateCommand != null)
-            //{
-            //    user.ProfileDancers.DanceRol_FK = userCommand.ProfileDancerUpdateCommand.DanceRol.DanceRolId;
-            //    user.ProfileDancers.DanceLevel_FK = userCommand.ProfileDancerUpdateCommand.DanceLevel.ProfileLevelId;
-            //    user.ProfileDancers.Height = userCommand.ProfileDancerUpdateCommand.Height;
-
-            //}
-
             return user;
         }
 
-        //public User MapToUserEntity(UserCreateCommand entity_)//usar mapper!!
-        //{
-        //    User user = new User();
-        //    user.UserName = entity_.UserName;
-        //    user.Email = entity_.Email;
-        //    user.Celphone = entity_.Celphone;
-        //    user.Age = entity_.Age;
-        //    user.AvatarImage = entity_.AvatarImage;
-        //    user.LastName = entity_.LastName;
-        //    user.Name = entity_.Name;        
-        //    user.Pass = entity_.Pass;
+        public User MapToUserEntity(UserCreateCommand entity_)
+        {
+            User user = new User();
+            user.UserName = entity_.UserName;
+            user.Email = entity_.Email;
+            user.Celphone = entity_.Celphone;
+            user.Age = entity_.Age;
+            user.AvatarImage = entity_.AvatarImage;
+            user.LastName = entity_.LastName;
+            user.Name = entity_.Name;
+            user.Pass = entity_.Pass;
 
-        //    if (entity_.ProfileDancerCreateCommand != null)
-        //    {
-        //        user.ProfileDancers.DanceRol_FK = entity_.ProfileDancerCreateCommand.DanceRol_FK;
-        //        user.ProfileDancers.DanceLevel_FK = entity_.ProfileDancerCreateCommand.DanceLevel_FK;
-        //        user.ProfileDancers.Height = entity_.ProfileDancerCreateCommand.Height;
+            if (entity_.ProfileDancer != null)
+            {
+                user.ProfileDancer.DanceRol_FK = entity_.ProfileDancer.DanceRol_FK;
+                user.ProfileDancer.DanceLevel_FK = entity_.ProfileDancer.DanceLevel_FK;
+                user.ProfileDancer.Height = entity_.ProfileDancer.Height;
 
-        //    }
+            }
 
-        //    return user;
-        //}
+            return user;
+        }
 
 
     }
