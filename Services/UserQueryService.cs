@@ -19,7 +19,7 @@ namespace Abrazos.Services
     {
         private readonly IMapper _mapper;
         private readonly ApplicationDbContext _context;
-        ILogger<UserQueryService> _logger;
+        ILogger _logger;
 
         public UserQueryService(ApplicationDbContext context, ILogger<UserQueryService> logger, IMapper mapper)
         {
@@ -62,7 +62,7 @@ namespace Abrazos.Services
             //.Take(take)
             //.ToListAsync();
 
-            _logger.LogWarning(queryable.ToString());
+            _logger.LogInformation(queryable.ToString());
 
             var result = _mapper.Map<DataCollection<UserDto>>(queryable);
 

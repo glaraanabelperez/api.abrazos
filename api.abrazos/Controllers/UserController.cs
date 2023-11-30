@@ -8,7 +8,7 @@ namespace api.abrazos.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    [Authorize]
+    //[Authorize]
     public class UserController : ControllerBase
     {
         private readonly IUserQueryService _userService;

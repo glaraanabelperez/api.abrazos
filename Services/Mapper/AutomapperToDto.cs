@@ -18,6 +18,15 @@ namespace Services.Mapper
             CreateMap<ProfileDancer, ProfileDancerDto>().ReverseMap();
             CreateMap<DataCollection<ProfileDancer>, DataCollection<ProfileDancerDto>>().ForMember(dest => dest.Items, sour => sour.MapFrom(s => s.Items));
 
+            //-- DanceLevel -----------
+            CreateMap<DanceLevel, DanceLevelDto>().ReverseMap();
+            CreateMap<DataCollection<DanceLevel>, DataCollection<DanceLevelDto>>().ForMember(dest => dest.Items, sour => sour.MapFrom(s => s.Items));
+
+            //-- DanceRol -----------
+            CreateMap<DanceRol, DanceRolDto>().ReverseMap();
+            CreateMap<DataCollection<DanceRol>, DataCollection<DanceRolDto>>().ForMember(dest => dest.Items, sour => sour.MapFrom(s => s.Items));
+
+
             //-- TypeEvenet_User -----------
             CreateMap<TypeEvent_User, TypeEvent_UserDto>().ReverseMap();
             CreateMap<DataCollection<TypeEvent_User>, DataCollection<TypeEvent_UserDto>>().ForMember(dest => dest.Items, sour => sour.MapFrom(s => s.Items));
