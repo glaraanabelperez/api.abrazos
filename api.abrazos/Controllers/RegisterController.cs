@@ -9,7 +9,7 @@ using Utils;
 namespace api.abrazos.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("v1/register")]
     public class RegisterController : ControllerBase
     {
         private readonly IUserCommandHandler _userCommandHandler;

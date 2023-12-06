@@ -7,7 +7,7 @@ using ServiceEventHandler.Command.CreateCommand;
 namespace api.abrazos.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("v1/users")]
     //[Authorize]
     public class UserController : ControllerBase
     {

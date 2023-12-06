@@ -16,9 +16,8 @@ namespace Abrazos.ServicesEvenetHandler.Mapper
             //CreateMap<DataCollection<UserCreateCommand>, DataCollection<Models.User>>().ForMember(dest => dest.Items, sour => sour.MapFrom(s => s.Items));
             //CreateMap<UserUpdateCommand, Models.User>();
 
-            ////-- Profile  -----------
-            //CreateMap<ProfileDancerCreateCommand, Models.ProfileDancer>().ReverseMap();
-            //CreateMap<ProfileDancerUpdateCommand, Models.ProfileDancer>();
+            //-- Profile  -----------
+            CreateMap<ProfileDancerCreateCommand, Models.ProfileDancer>().ReverseMap();
 
         }
 

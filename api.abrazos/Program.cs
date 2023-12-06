@@ -30,9 +30,10 @@ builder.Services.AddTransient<AbrazosDbContext, ApplicationDbContext>();
 builder.Services.AddTransient<IGenericRepository, GenericRepository>();
 builder.Services.AddTransient<IUserCommandHandler, UserCommandHandler>();
 builder.Services.AddTransient<IUserQueryService, UserQueryService>();
+builder.Services.AddTransient<IProfileDancerQueryService, ProfileDancerQueryService>();
 
 //Cors
- string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 
  builder.Services.AddCors(options =>
@@ -40,7 +41,9 @@ builder.Services.AddTransient<IUserQueryService, UserQueryService>();
         options.AddPolicy(name: MyAllowSpecificOrigins,
                           policy =>
                           {
-                              policy.WithOrigins("*");
+                              policy.WithOrigins("*")
+                              .AllowAnyHeader()
+                              .AllowAnyMethod();
                           });
     });
 
@@ -49,7 +52,6 @@ builder.Services.AddTransient<IUserQueryService, UserQueryService>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 //Config Logger
-
 
 var logDB = "workstation id=abrazoApp.mssql.somee.com;packet size=4096;user id=glaraanabelperez_SQLLogin_1;pwd=cngl7g9dti;data source=abrazoApp.mssql.somee.com;persist security info=False;initial catalog=abrazoApp";
 var sinkOpts = new MSSqlServerSinkOptions();
@@ -70,24 +72,6 @@ Log.Logger = new LoggerConfiguration()
      )
     .ReadFrom.Configuration(builder.Configuration)
     .CreateLogger();
-
-try
-{
-    Log.Information("Application starting up.");
-
-}
-catch (Exception ex)
-{
-    Log.Fatal(ex, "The application failed to start up correctly.");
-}
-finally
-{
-    Log.CloseAndFlush();
-}
-
-
-
-//Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(builder.Configuration).CreateLogger();
 
 
 
