@@ -72,7 +72,7 @@ namespace Abrazos.Services.Dto
         /// <summary>
         /// 
         /// </summary>
-        public ProfileDancerDto? ProfileDancer { get; set; }  = new ProfileDancerDto();
+        public ProfileDancerDto? ProfileDancer { get; set; } 
         ///// <summary>
         ///// 
         ///// </summary>
@@ -93,6 +93,9 @@ namespace Abrazos.Services.Dto
         ///// 
         ///// </summary>{ get; set; }
         //public ICollection<EventDto>? EventsCreated = new List<EventDto>();
+
+
+
 
 
     }

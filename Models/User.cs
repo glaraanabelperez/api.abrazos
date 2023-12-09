@@ -73,7 +73,7 @@ namespace Models
         /// <summary>
         /// 
         /// </summary>
-        public ProfileDancer? ProfileDancer { get; set; } = new ProfileDancer();
+        public ProfileDancer? ProfileDancer { get; set; }
         /// <summary>
         /// 
         /// </summary>

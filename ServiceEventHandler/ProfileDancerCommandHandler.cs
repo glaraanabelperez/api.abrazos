@@ -1,7 +1,6 @@
 ﻿
 
 using Abrazos.Persistence.Database;
-using Abrazos.Services.Dto;
 using Abrazos.ServicesEvenetHandler.Intefaces;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -20,9 +19,9 @@ namespace Abrazos.ServiceEventHandler
         private readonly ILogger<ProfileDancerCommandHandler> _logger;
         private readonly ApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
-        public IGenericRepository<ProfileDancer> command;
+        public IGenericRepository<ProfileDancerCreateCommand> command;
 
-        public ProfileDancerCommandHandler(ApplicationDbContext dbContext, IGenericRepository<ProfileDancer> command, 
+        public ProfileDancerCommandHandler(ApplicationDbContext dbContext, IGenericRepository<ProfileDancerCreateCommand> command, 
             ILogger<ProfileDancerCommandHandler> logger, IMapper mapper)
         {
             _dbContext = dbContext;
@@ -43,7 +42,7 @@ namespace Abrazos.ServiceEventHandler
                 {
                     user.ProfileDancerId_FK = resProfile.ProfileDanceId;
                     var userResult_ = await this.command.Update<User>(user);
-                    res.objectResult = _mapper.Map<UserDto>(userResult_);
+                    res.Succeeded = true;
                 }
             }
             catch(Exception ex)
@@ -55,38 +54,38 @@ namespace Abrazos.ServiceEventHandler
 
         }
 
-        public Task<ResultApp> AddProfile(ProfileDancerCreateCommand entity)
+        public async Task<ResultApp> Update(ProfileDancerUpdateCommand command)
         {
-            throw new NotImplementedException();
+            ResultApp res = new ResultApp();
+            try
+            {
+                ProfileDancer profile = _dbContext.ProfileDancer.FirstOrDefault(u => u.ProfileDanceId == command.ProfileDanceId);
+
+                if (profile != null)
+                {
+
+                    await this.command.Update<ProfileDancer>(UpdateEntity(profile, command));
+                    res.Succeeded = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                res.message = ex.Message;
+            }
+
+            return res;
+
+
+
         }
 
-        //public async Task<ResultApp> UpdateProfile(ProfileDancerCreateCommand command)
-        //{
-        //    ResultApp res = null;
-        //    var result = _dbContext.User
-        //        .FirstOrDefault(u => u.UserId == command.UserId);
-
-        //    if (result != null)
-        //    {
-        //       res = await this.command.Update<User>(MapToUserEntityInUpdate(result, command));
-        //    }
-        //    return res;
-
-        //}
-
-        //public User MapToUserEntityInUpdate(User user, UserUpdateCommand userCommand)
-        //{
-        //    user.UserName = (userCommand.UserName != null && userCommand.UserName != string.Empty) ? userCommand.UserName : user.UserName;
-        //    user.Email = (userCommand.Email != null && userCommand.Email != string.Empty) ? userCommand.Email : user.Email;
-        //    user.Celphone = ( userCommand.Celphone != null && userCommand.Celphone != string.Empty) ? userCommand.Celphone : user.Celphone;
-        //    user.Age = userCommand.Age != 0 ? userCommand.Age : user.Age;
-        //    user.AvatarImage = (userCommand.AvatarImage != null && userCommand.AvatarImage != string.Empty) ? userCommand.AvatarImage : user.AvatarImage;
-        //    user.LastName = (userCommand.LastName != null && userCommand.LastName != string.Empty )? userCommand.LastName : user.LastName;
-        //    user.Name = (userCommand.Name != null && userCommand.Name != string.Empty) ? userCommand.Name : user.Name;
-        //    user.Pass = (userCommand.Pass != null && userCommand.Pass != string.Empty )? userCommand.Pass : user.Pass;
-
-        //    return user;
-        //}
+        public ProfileDancer UpdateEntity(ProfileDancer profile, ProfileDancerUpdateCommand comand_)
+        {
+            profile.DanceRol_FK = comand_.DanceRol_FK != 0 ? comand_.DanceRol_FK : profile.DanceRol_FK;
+            profile.DanceLevel_FK = comand_.DanceLevel_FK != 0 ? comand_.DanceLevel_FK : profile.DanceLevel_FK;
+            profile.Height = comand_.Height.HasValue ? comand_.Height : profile.Height;
+            return profile;
+        }
 
         public ProfileDancer MapToProfileEntity(ProfileDancerCreateCommand comand_)
         {
@@ -97,10 +96,6 @@ namespace Abrazos.ServiceEventHandler
             return entity;
         }
 
-        public Task<ResultApp> UpdateProfile(ProfileDancerUpdateCommand entity)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
 

@@ -1,3 +1,4 @@
+using Abrazos.ServiceEventHandler;
 using Abrazos.Services.Interfaces;
 using Abrazos.ServicesEvenetHandler.Intefaces;
 using Microsoft.AspNetCore.Authorization;
@@ -11,77 +12,42 @@ namespace api.abrazos.Controllers
     //[Authorize]
     public class ProfileDancerController : ControllerBase
     {
-        private readonly IProfileDancerQueryService _profile;
-        //private readonly IUserCommandHandler _userCommandHandler;
+        private readonly IProfileDancerCommandHandler _profile;
 
-        public ProfileDancerController(IProfileDancerQueryService profile)
+        public ProfileDancerController(IProfileDancerCommandHandler profile)
         {
             _profile = profile;
         }
 
-        [HttpGet("{profileId}")]
-        public async Task<IActionResult> GetAsync(int profileId)
+        [HttpPost]
+        public async Task<IActionResult> AddAsync(ProfileDancerCreateCommand profile)
         {
-            var user = await _profile.GatAsync(profileId);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-            return Ok(user);
+            var result = await _profile.Add(profile);
+            return result?.Succeeded ?? false
+                    ? Ok(result)
+                    : BadRequest(result?.message);
 
         }
 
-        ///// <summary>
-        ///// Return All Users by some filters.
-        ///// </summary>
-        ///// <param name="page"></param>
-        ///// <param name="take"></param>
-        ///// <param name="name"></param>
-        ///// <param name="userName"></param>
-        ///// <param name="userStates"></param>
-        ///// <param name="danceLevel"></param>
-        ///// <param name="danceRol"></param>
-        ///// <param name="evenType"></param>
-        ///// <returns></returns>
-        //[HttpGet]
-        //public async Task<IActionResult> GetAll(
-        //    int page = 1,
-        //    int take = 500,
-        //    string? name = null,
-        //    string? userName = null,
-        //    bool? userStates = null,
-        //    int? danceLevel = null,
-        //    int? danceRol = null,
-        //    int? evenType = null
-        //)
-        //{
+        [HttpPut]
+        public async Task<IActionResult> UpdateAsync(ProfileDancerUpdateCommand profile)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    var users = await _userService.GetAllAsync(
-        //      page,
-        //      take,
-        //      name,
-        //      userName,
-        //      userStates,
-        //      danceLevel,
-        //      danceRol,
-        //      evenType
-        //       );
+            var result = await _profile.Update(profile);
+            return result?.Succeeded ?? false
+                    ? Ok(result)
+                    : BadRequest(result?.message);
 
-        //    return Ok(users);
-        //}
-
-        //[HttpPut]
-        ////[Route("/updateUser")]
-        //public async Task<IActionResult> UpdateUser(UserUpdateCommand User)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    var result = await _userCommandHandler.UpdateUser(User);
-        //    return result?.Succeeded ?? false
-        //            ? Ok(result)
-        //            : BadRequest(result?.message);
-
-        //}
+        }
 
     }
 }

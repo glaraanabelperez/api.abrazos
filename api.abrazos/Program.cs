@@ -9,6 +9,7 @@ using Serilog;
 using ServicesQueries.Auth;
 using Serilog.Sinks.MSSqlServer;
 using Serilog.Formatting.Compact;
+using ServiceEventHandler.Command.CreateCommand;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,13 +25,18 @@ builder.Services.AddDbContext<ApplicationDbContext>(
 builder.Services.AddHealthChecks();
 //.AddDbContextCheck<ApplicationDbContext>();
 
+//Config Mapper
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 // Add services to the container.
 builder.Services.AddTransient<AbrazosDbContext, ApplicationDbContext>();
-builder.Services.AddTransient<IGenericRepository, GenericRepository>();
+
+builder.Services.AddTransient<IGenericRepository<ProfileDancerCreateCommand>, GenericRepository<ProfileDancerCreateCommand>>();
+builder.Services.AddTransient<IGenericRepository<UserCreateCommand>, GenericRepository<UserCreateCommand>>();
+
+builder.Services.AddTransient<IProfileDancerCommandHandler, ProfileDancerCommandHandler>();
 builder.Services.AddTransient<IUserCommandHandler, UserCommandHandler>();
 builder.Services.AddTransient<IUserQueryService, UserQueryService>();
-builder.Services.AddTransient<IProfileDancerQueryService, ProfileDancerQueryService>();
 
 //Cors
 string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -48,8 +54,7 @@ string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
     });
 
 
-//Config Mapper
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 
 //Config Logger
 

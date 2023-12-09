@@ -25,17 +25,16 @@ namespace Abrazos.ServiceEventHandler
             _mapper = mapper;
         }
 
-        public async Task<T> Add<T1>(T entity) where T1 : class
+        public async Task<T1> Add<T1>(T1 entity) where T1 : class
         {
             using (IDbContextTransaction transac = await _dbContext.Database.BeginTransactionAsync())
             {
                 try
                 {
-                    var dbSet = _dbContext.Set<T>();
+                    var dbSet = _dbContext.Set<T1>();
                     var res_ = dbSet.Add(entity).Entity;
                     await _dbContext.SaveChangesAsync();
                     await transac.CommitAsync();
-
                     //_logger.LogWarning(res_.Metadata.ToString());
                    
                     return res_;
@@ -51,26 +50,26 @@ namespace Abrazos.ServiceEventHandler
             }
         }
 
-        public Task<ResultApp> Delete<T1>(int id) where T1 : class
+        public Task<int> Delete<T1>(int id) where T1 : class
         {
             throw new NotImplementedException();
         }
 
-        public async Task<T> Update<T1>(T entity) where T1 : class
+        public async Task<T1> Update<T1>(T1 entity) where T1 : class
         {
             using (IDbContextTransaction transac = await _dbContext.Database.BeginTransactionAsync())
             {
-                ResultApp res = new ResultApp();
                 try
                 {
 
-                    var dbSet = _dbContext.Set<T>();
+                    var dbSet = _dbContext.Set<T1>();
                     var entyResult = dbSet.Attach(entity).Entity;
                     _dbContext.Entry(entity).State = EntityState.Modified;
-                    await _dbContext.SaveChangesAsync();
+                    _dbContext.SaveChanges();
                     await transac.CommitAsync();
 
                     //_logger.LogWarning(res_.Metadata.ToString());
+
                     return entyResult;
                 }
                 catch (System.Exception ex)
@@ -83,8 +82,6 @@ namespace Abrazos.ServiceEventHandler
 
             }
         }
-
-       
     }
 }
 
