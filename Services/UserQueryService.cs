@@ -70,9 +70,9 @@ namespace Abrazos.Services
             return result;
         }
 
-        public async Task<ResultApp> GatAsync(long userId)
+        public async Task<ResultApp<UserDto>> GatAsync(long userId)
         {
-            ResultApp resultApp = new ResultApp();
+            ResultApp<UserDto> resultApp = new ResultApp<UserDto>();
             try
             {
 
@@ -115,10 +115,10 @@ namespace Abrazos.Services
 
         }
 
-        public async Task<ResultApp> LoginAsync(string email, string pass)
+        public async Task<ResultApp<UserDto>> LoginAsync(string email, string pass)
         {
 
-            ResultApp res = new ResultApp();
+            ResultApp<UserDto> res = new ResultApp<UserDto>();
             try
             {
                 var queryable = await _context.User

@@ -44,7 +44,7 @@ namespace ServicesQueries.Auth
                 if (RegexUtilities.IsValidEmail(email))
                 {
                     var user = await _userService.LoginAsync(email, password);
-                    if (user.Succeeded)
+                    if (user.Succeeded.HasValue)
                     {
                         var claims = new[] { new Claim(ClaimTypes.Name, email) };
                         var identity = new ClaimsIdentity(claims, Scheme.Name);

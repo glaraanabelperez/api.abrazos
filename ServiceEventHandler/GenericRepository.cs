@@ -12,26 +12,26 @@ using Utils;
 
 namespace Abrazos.ServiceEventHandler
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository : IGenericRepository
     {
-        private readonly ILogger<GenericRepository<T>> _logger;
+        private readonly ILogger<GenericRepository> _logger;
         private readonly ApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
 
-        public GenericRepository(ApplicationDbContext dbContext, ILogger<GenericRepository<T>> logger, IMapper mapper)
+        public GenericRepository(ApplicationDbContext dbContext, ILogger<GenericRepository> logger, IMapper mapper)
         {
             _dbContext = dbContext;
             _logger = logger;
             _mapper = mapper;
         }
 
-        public async Task<T1> Add<T1>(T1 entity) where T1 : class
+        public async Task<T> Add<T>(T entity) where T : class
         {
             using (IDbContextTransaction transac = await _dbContext.Database.BeginTransactionAsync())
             {
                 try
                 {
-                    var dbSet = _dbContext.Set<T1>();
+                    var dbSet = _dbContext.Set<T>();
                     var res_ = dbSet.Add(entity).Entity;
                     await _dbContext.SaveChangesAsync();
                     await transac.CommitAsync();
@@ -82,6 +82,8 @@ namespace Abrazos.ServiceEventHandler
 
             }
         }
+
+
     }
 }
 

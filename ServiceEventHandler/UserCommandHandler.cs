@@ -20,9 +20,9 @@ namespace Abrazos.ServiceEventHandler
         private readonly ILogger<UserCommandHandler> _logger;
         private readonly ApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
-        public IGenericRepository<UserCreateCommand> command;
+        public IGenericRepository command;
 
-        public UserCommandHandler(ApplicationDbContext dbContext, IGenericRepository<UserCreateCommand> command, 
+        public UserCommandHandler(ApplicationDbContext dbContext, IGenericRepository command, 
             ILogger<UserCommandHandler> logger, IMapper mapper)
         {
             _dbContext = dbContext;
@@ -31,10 +31,10 @@ namespace Abrazos.ServiceEventHandler
             _logger = logger;
         }
 
-        public async Task<ResultApp> AddUser(UserCreateCommand entity)
+        public async Task<ResultApp<UserDto>> AddUser(UserCreateCommand entity)
         {
 
-            ResultApp res = new ResultApp();
+            ResultApp<UserDto> res = new ResultApp<UserDto>();
             try 
             { 
                var user_res = await this.command.Add<User>(MapToUserEntity(entity));
@@ -50,9 +50,9 @@ namespace Abrazos.ServiceEventHandler
 
         }
 
-        public async Task<ResultApp> UpdateUser(UserUpdateCommand command)
+        public async Task<ResultApp<UserDto>> UpdateUser(UserUpdateCommand command)
         {
-            ResultApp res = new ResultApp();
+            ResultApp<UserDto> res = new ResultApp<UserDto>();
             var result = _dbContext.User
                 .FirstOrDefault(u => u.UserId == command.userId);
 

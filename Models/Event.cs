@@ -15,16 +15,15 @@ namespace Models
         public DateTime DateFinish { get; set; }
         public int EventStateId_fk { get; set; }
         public int TypeEventId_fk { get; set; }
-
+        public EventState EventState_ { get; set; }
+        public TypeEvent TypeEvent_ { get; set; }
+        public User UserCreator { get; set; }
+        public Address Address { get; set; }
         public ICollection<WaitList> WaitLists { get; set; } = new List<WaitList>();
-
         public ICollection<CouplesEvent_Date> CouplesEvents { get; set; } = new List<CouplesEvent_Date>();
 
-        //public ICollection<TypeEvent_User> TypeEvent_User = new List<TypeEvent_User>();
 
-        public User UserCreator { get; set; } = new User();
 
-        public Address Address { get; set; } = new Address();
 
     }
 }

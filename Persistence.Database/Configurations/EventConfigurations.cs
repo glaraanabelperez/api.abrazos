@@ -50,10 +50,13 @@ namespace Abrazos.Persistence.Database.Configurations
                 .WithOne(e => e.Event)
                 .HasForeignKey(w => w.EventId_FK);
 
-            builder.HasOne(e => e.Address)
-               .WithMany(Events => Events.Events)
-               .HasForeignKey(Event => Event.AddressId_fk);
-            //faltaria couples para este evento?
+            builder.HasOne(e => e.TypeEvent_)
+               .WithMany(Events => Events.events)
+               .HasForeignKey(Event => Event.TypeEventId_fk);
+
+            builder.HasOne(e => e.EventState_)
+               .WithMany(e => e.Events)
+               .HasForeignKey(e => e.EventStateId_fk);
         }
     }
 }

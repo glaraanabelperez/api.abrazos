@@ -4,7 +4,7 @@ using Utils;
 
 namespace Abrazos.ServicesEvenetHandler.Intefaces
 {
-     public interface IGenericRepository<T1>where T1 : class
+     public interface IGenericRepository
     {
         public Task<T> Add<T>(T entity) where T : class;
         public Task<T> Update<T>(T entity) where T : class;

@@ -9,9 +9,9 @@ namespace Models
         public int CountryId_FK { get; set; }
         public string Name { get; set; }
 
-        public Country Country { get; set; } = new Country();
+        public Country? Country { get; set; }
 
-        public ICollection<Address> Address { get; set; } = new List<Address>();
+        public ICollection<Address>? Address { get; set; } = null;
 
     }
 }

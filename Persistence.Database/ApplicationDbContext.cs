@@ -24,6 +24,7 @@ namespace Abrazos.Persistence.Database
         public virtual DbSet<User> User { get; set; } = null!;
         public virtual DbSet<UserPermission> UserPermission { get; set; } = null!;
         public virtual DbSet<WaitList> WaitList { get; set; } = null!;
+        public virtual DbSet<EventState> EventStates { get; set; } = null!;
 
 
         protected override void ModelConfig(ModelBuilder modelBuilder)
@@ -43,6 +44,7 @@ namespace Abrazos.Persistence.Database
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new UserPermissionConfiguration());
             modelBuilder.ApplyConfiguration(new WaitListConfiguration());
+            modelBuilder.ApplyConfiguration(new EventStateConfiguration());
 
 
         }

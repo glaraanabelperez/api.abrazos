@@ -5,11 +5,10 @@ namespace ServiceEventHandler.Command.CreateCommand
 {
     public class CityCreateCommand
     {
+        public int? CountryId_FK { get; set; }//validar uno u otro
         [Required]
-        public int CountryId_FK { get; set; }
-        [Required]
-        [StringLength(255, MinimumLength = 8)]
+        [StringLength(255, MinimumLength = 2)]
         public string Name { get; set; } = string.Empty;
-
+        public CountryCreateCommand? Country_ { get; set; }
     }
 }

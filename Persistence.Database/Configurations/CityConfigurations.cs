@@ -23,7 +23,7 @@ namespace Abrazos.Persistence.Database.Configurations
            .HasForeignKey(e => e.CityId_FK);
 
             builder.HasOne(e => e.Country)
-              .WithMany(e => e.Cities)
+              .WithMany()
               .HasForeignKey(e => e.CountryId_FK);
         }
     }

@@ -8,7 +8,7 @@ namespace Models
         public int CountryId { get; set; }
         public string Name { get; set; } = null!;
 
-        public ICollection<City> Cities { get; set; } = new List<City>();
+        //public ICollection<City>? Cities { get; set; } = null;
 
     }
 }
