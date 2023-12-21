@@ -14,7 +14,7 @@ namespace ServiceEventHandler.Validators
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (id!=0 && objectCommand!=null)
+            if (id==0 && objectCommand==null)
             {
                 yield return new ValidationResult("Al menos una de las propiedades debe tener un valor.", new[] { nameof(id), nameof(objectCommand) });
             }

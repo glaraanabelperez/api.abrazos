@@ -93,6 +93,7 @@ namespace Abrazos.ServiceEventHandler
             user.LastName = entity_.LastName;
             user.Name = entity_.Name;
             user.Pass = entity_.Pass;
+            user.UserState = true;
 
             if (entity_.ProfileDancer != null)
             {

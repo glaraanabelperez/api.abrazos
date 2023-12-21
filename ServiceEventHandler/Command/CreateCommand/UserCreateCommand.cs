@@ -26,7 +26,7 @@ namespace ServiceEventHandler.Command.CreateCommand
         [MaxLength(250)]
         public string? AvatarImage { get; set; }
 
-        public ProfileDancerCreateCommand? ProfileDancer { get; set; } = new ProfileDancerCreateCommand();
+        public ProfileDancerCreateCommand? ProfileDancer { get; set; }
 
     }
 }

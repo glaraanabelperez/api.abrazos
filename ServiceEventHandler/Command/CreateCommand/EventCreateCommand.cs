@@ -19,7 +19,7 @@ namespace ServiceEventHandler.Command.CreateCommand
         public int TypeEventId_fk { get; set; }
 
         public int eventState { get; set; }
-        public AddressCreateCommand? Address { get; set; } = new AddressCreateCommand();
+        public AddressCreateCommand? Address { get; set; }
 
 
 

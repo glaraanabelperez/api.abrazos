@@ -60,7 +60,7 @@ namespace Abrazos.ServiceEventHandler
 
         public bool ValidateCommand(EventCreateCommand command)
         {
-            var myModel = new IdOrObjectClassAttribute { id = command.AddressId_fk, objectCommand = command };
+            var myModel = new IdOrObjectClassAttribute { id = command.AddressId_fk, objectCommand = command.Address };
 
             var validationResults = new List<ValidationResult>();
             var isValid = Validator.TryValidateObject(myModel, new ValidationContext(myModel), validationResults, true);
