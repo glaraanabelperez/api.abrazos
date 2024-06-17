@@ -1,4 +1,4 @@
-﻿namespace Abrazos.Services.Dto
+﻿namespace ServicesQueries.Dto
 {
     public class PermissionDto
     {

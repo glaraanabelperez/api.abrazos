@@ -2,6 +2,7 @@ using Abrazos.Services.Interfaces;
 using Abrazos.ServicesEvenetHandler.Intefaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Models;
 using ServiceEventHandler.Command.CreateCommand;
 
 namespace api.abrazos.Controllers
@@ -12,34 +13,25 @@ namespace api.abrazos.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserQueryService _userService;
-        private readonly IUserCommandHandler _userCommandHandler;
+        private readonly IUserCommandService _userCommandHandler;
 
-        public UserController(IUserQueryService IUserService,IUserCommandHandler userCommandHandler)
+        public UserController(IUserQueryService IUserService, IUserCommandService userCommandHandler)
         {
             _userService = IUserService;
             _userCommandHandler = userCommandHandler;
         }
 
-        [HttpGet("{userId}")]
-        public async Task<IActionResult> GetUserById(int userId)
-        {
-            var user = await _userService.GatAsync(userId);
-
-            return Ok(user);
-
-        }
 
         /// <summary>
-        /// Return All Users by some filters.
+        /// Return All Users by some filters. 
         /// </summary>
         /// <param name="page"></param>
         /// <param name="take"></param>
         /// <param name="name"></param>
         /// <param name="userName"></param>
         /// <param name="userStates"></param>
-        /// <param name="danceLevel"></param>
-        /// <param name="danceRol"></param>
-        /// <param name="evenType"></param>
+        /// <param name="cityId"></param>
+        /// <param name="countryId"></param>
         /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> GetAll(
@@ -48,28 +40,68 @@ namespace api.abrazos.Controllers
             string? name = null,
             string? userName = null,
             bool? userStates = null,
-            int? danceLevel = null,
-            int? danceRol = null,
-            int? evenType = null
+            int? cityId = null,
+            string? countryId = null
         )
         {
 
             var users = await _userService.GetAllAsync(
-              page,
-              take,
-              name,
-              userName,
-              userStates,
-              danceLevel,
-              danceRol,
-              evenType
-               );
-
-            return Ok(users);
+                                                   page = 1,
+                                                   take = 500,
+                                                   name = null,
+                                                   userName = null,
+                                                   userStates = null,
+                                                   cityId = null,
+                                                   countryId = null
+                                                );
+            return users!=null
+                    ? Ok(users)
+                    : NoContent();
         }
 
-        [HttpPut]
-        //[Route("/updateUser")]
+        /// <summary>
+        /// Return All Users by some filters. 
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="take"></param>
+        /// <param name="name"></param>
+        /// <param name="userName"></param>
+        /// <param name="userStates"></param>
+        /// <param name="cityId"></param>
+        /// <param name="countryId"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("/ActiveUsersProfiles")]
+        public async Task<IActionResult> GetAllActiveUsersProfiles(
+            int page = 1,
+            int take = 500,
+            string? name = null,
+            string? userName = null,
+            int? danceLevel = null,
+            int? danceRol = null,
+            int? evenType = null,
+            int? cityId = null,
+            string? countryId = null
+        )
+        {
+
+            var users = await _userService.GetAllUserProfileAsync(
+                                                   page,
+                                                   take,
+                                                   name,
+                                                   userName,
+                                                   danceLevel,
+                                                   danceRol,
+                                                   evenType,
+                                                   cityId,
+                                                   countryId 
+                                                );
+            return users != null
+                    ? Ok(users)
+                    : NoContent();
+        }
+
+        [HttpPatch]
         public async Task<IActionResult> UpdateUser(UserUpdateCommand User)
         {
             if (!ModelState.IsValid)
@@ -81,6 +113,36 @@ namespace api.abrazos.Controllers
             return result?.Succeeded ?? false
                     ? Ok(result)
                     : BadRequest(result?.message);
+
+        }
+        [HttpPost]
+        public async Task<IActionResult> Add(UserCreateCommand User)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await _userCommandHandler.AddUser(User);
+            return result?.Succeeded ?? false
+                    ? Ok(result)
+                    : BadRequest(result?.message);
+
+        }
+
+        /// <summary>
+        /// Return Evenet by Id.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetAsync(int userId)
+        {
+            var event_ = await _userService.GatAsync(userId);
+
+            return event_ != null
+            ? Ok(event_)
+            : StatusCode(204);
 
         }
 

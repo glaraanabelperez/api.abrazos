@@ -7,7 +7,7 @@ namespace ServiceEventHandler.Command.CreateCommand
     {
         [Range(1, int.MaxValue, ErrorMessage = "Value must be greater than zero.")]
         public int DanceRolId { get; set; }
-        [StringLength(255, MinimumLength = 8)]
-        public string Name { get; set; } = null!;
+        [MaxLength(255)]
+        public string? Name { get; set; } = null!;
     }
 }

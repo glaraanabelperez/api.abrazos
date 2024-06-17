@@ -13,18 +13,20 @@ namespace Abrazos.Persistence.Database.Configurations
             builder.Property(e => e.CityId)
                 .HasColumnType("int")
                 .HasColumnName("CityId");
-            builder.Property(e => e.CountryId_FK)
-              .HasColumnName("CountryId_FK");
-            builder.Property(e => e.Name)
-              .HasColumnName("Name");
-
-            builder.HasMany(e => e.Address)
-           .WithOne(e => e.City)
-           .HasForeignKey(e => e.CityId_FK);
+        
+            builder.Property(e => e.CityName)
+              .HasColumnName("CityName");
+            builder.Property(e => e.StateName)
+              .HasColumnName("StateName");
 
             builder.HasOne(e => e.Country)
-              .WithMany()
-              .HasForeignKey(e => e.CountryId_FK);
+          .WithMany(e => e.Cities)
+          .HasForeignKey(e => e.CountryId);
+
+            builder.HasMany(e => e.Address)
+         .WithOne(e => e.City)
+         .HasForeignKey(e => e.CityId);
+
         }
     }
 }

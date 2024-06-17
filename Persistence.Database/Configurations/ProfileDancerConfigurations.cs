@@ -12,21 +12,36 @@ namespace Abrazos.Persistence.Database.Configurations
             builder.ToTable("ProfileDancer");
             builder.Property(e => e.ProfileDanceId)
                 .HasColumnType("int")
-                .HasColumnName("ProfileDanceId");
+                .HasColumnName("ProfileDancerId");
 
-            builder.Property(e => e.DanceLevel_FK)
-              .HasColumnName("DanceLevel_FK");
-            builder.Property(e => e.DanceRol_FK)
-             .HasColumnName("DanceRol_FK");
-            builder.Property(e => e.Height)
-             .HasColumnName("Height");
+            builder.Property(e => e.DanceLevelId)
+              .HasColumnName("DanceLevelId");
+
+            builder.Property(e => e.DanceRolId)
+             .HasColumnName("DanceRolId");
+
+            builder.Property(e => e.DanceId)
+              .HasColumnName("DanceId");
+
+            builder.Property(e => e.UserId)
+              .HasColumnName("UserId");
+
 
             builder.HasOne(e => e.DanceLevel)
                 .WithMany()
-                .HasForeignKey(e => e.DanceLevel_FK);
+                .HasForeignKey(e => e.DanceLevelId);
+
             builder.HasOne(e => e.DanceRol)
                .WithMany()
-               .HasForeignKey(e => e.DanceRol_FK);
+               .HasForeignKey(e => e.DanceRolId);
+
+            builder.HasOne(e => e.User)
+               .WithMany(prof => prof.ProfileDancer)
+               .HasForeignKey(e => e.UserId);
+
+            builder.HasOne(x => x.Dance)
+                .WithMany(e => e.ProfileDancers)
+                .HasForeignKey(x => x.DanceId);
 
         }
     }

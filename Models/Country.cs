@@ -5,10 +5,10 @@ namespace Models
 {
     public class Country
     {
-        public int CountryId { get; set; }
-        public string Name { get; set; } = null!;
+        public char CountryId { get; set; }
+        public string Name { get; set; }
 
-        //public ICollection<City>? Cities { get; set; } = null;
+        public ICollection<City> Cities { get; set; } = new List<City>();
 
     }
 }

@@ -1,7 +1,5 @@
-using Abrazos.ServiceEventHandler;
 using Abrazos.Services.Interfaces;
 using Abrazos.ServicesEvenetHandler.Intefaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ServiceEventHandler.Command.CreateCommand;
 
@@ -12,11 +10,14 @@ namespace api.abrazos.Controllers
     //[Authorize]
     public class ProfileDancerController : ControllerBase
     {
-        private readonly IProfileDancerCommandHandler _profile;
+        private readonly IProfileDancerCommandService _queryCommand;
+        private readonly IProfileDancerQueryService _queryService;
 
-        public ProfileDancerController(IProfileDancerCommandHandler profile)
+
+        public ProfileDancerController(IProfileDancerCommandService queryCommand, IProfileDancerQueryService queryService)
         {
-            _profile = profile;
+            _queryCommand = queryCommand;
+            _queryService = queryService;
         }
 
         [HttpPost]
@@ -27,14 +28,14 @@ namespace api.abrazos.Controllers
                 return BadRequest(ModelState);
             }
 
-            var result = await _profile.Add(profile);
+            var result = await _queryCommand.Add(profile);
             return result?.Succeeded ?? false
                     ? Ok(result)
-                    : BadRequest(result?.message);
+                    : BadRequest(result);
 
         }
 
-        [HttpPut]
+        [HttpPatch]
         public async Task<IActionResult> UpdateAsync(ProfileDancerUpdateCommand profile)
         {
             if (!ModelState.IsValid)
@@ -42,12 +43,44 @@ namespace api.abrazos.Controllers
                 return BadRequest(ModelState);
             }
 
-            var result = await _profile.Update(profile);
+            var result = await _queryCommand.Update(profile);
             return result?.Succeeded ?? false
                     ? Ok(result)
                     : BadRequest(result?.message);
 
         }
 
+
+        /// <summary>
+        /// Return Profile by Id. 
+        ///     (The app show all users, by city for example, and then on click in one user, the app will shor the profile-)
+        /// </summary>
+        /// <param name="eventId"></param>
+        /// <returns></returns>
+        [HttpGet("{profileId}")]
+        public async Task<IActionResult> GetAsync(int profileId)
+        {
+
+            var event_ = await _queryService.GatAsync(profileId);
+            return event_ != null
+            ? Ok(event_)
+            : StatusCode(204);
+
+        }
+        /// <summary>
+        /// Delete profile by Id.
+        /// </summary>
+        /// <param name="eventId"></param>
+        /// <returns></returns>
+        [HttpDelete("{profileId}")]
+        public async Task<IActionResult> DeleteAsync(int profileId)
+        {
+
+            var event_ = await _queryCommand.DeleteAsync(profileId);
+            return event_ != null
+            ? Ok(event_)
+            : StatusCode(204);
+
+        }
     }
 }

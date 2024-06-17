@@ -6,9 +6,9 @@ namespace ServiceEventHandler.Command.CreateCommand
     public class UserPermissionCreateCommand
     {
         [Required]
-        public int UserId_FK { get; set; }
+        public int UserId { get; set; }
         [Required]
-        public int Permission_FK { get; set; }
+        public int Permission { get; set; }
 
     }
 }

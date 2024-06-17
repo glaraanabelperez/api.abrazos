@@ -14,19 +14,20 @@ namespace Abrazos.Persistence.Database.Configurations
                 .HasColumnType("int")
                 .HasColumnName("UserPermissionId");
 
-            builder.Property(e => e.Permission_FK)
-              .HasColumnName("Permission_FK");
+            builder.Property(e => e.PermissionId)
+              .HasColumnName("PermissionId");
 
-            builder.Property(e => e.UserId_FK)
-                .HasColumnName("UserId_FK");
+            builder.Property(e => e.UserId)
+                .HasColumnName("UserId");
 
             builder.HasOne(u => u.User)
                 .WithMany(up => up.UserPermissions)
-                .HasForeignKey(u => u.UserId_FK);
+                .HasForeignKey(u => u.UserId);
 
             builder.HasOne(u => u.Permission)
                 .WithMany(up => up.UserPermissions)
-                .HasForeignKey(u => u.Permission_FK);
+                .HasForeignKey(u => u.PermissionId);
+
 
         }
     }

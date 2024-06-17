@@ -6,9 +6,9 @@ namespace ServiceEventHandler.Command.CreateCommand
     public class TypeEvent_UserCreateCommand
     {
         [Required]
-        public int TypeEventId_FK { get; set; }
+        public int TypeEventId { get; set; }
         [Required]
-        public int UserId_FK { get; set; }
+        public int UserId { get; set; }
 
     }
 }

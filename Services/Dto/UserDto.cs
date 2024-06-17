@@ -1,101 +1,37 @@
-﻿
-using Models;
+﻿using Models;
 
-namespace Abrazos.Services.Dto
+namespace ServicesQueries.Dto
+
 {
-    public class UserDto
+    public class UserDto 
     {
-        /// <summary>
-        /// 
-        /// </summary>
+
         public int UserId { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Name { get; set; } = null!;
-        /// <summary>
-        /// 
-        /// </summary>
+        public string Name { get; set; }
         public string? LastName { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
         public string? UserName { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Pass { get; set; } = null!;
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Email { get; set; } = null!;
-        /// <summary>
-        /// 
-        /// </summary>
+        public string? UserIdFirebase { get; set; }
+        public string Email { get; set; }
         public int? Age { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
         public string? Celphone { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
         public string? AvatarImage { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public int? ProfileDancerId_FK { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
         public bool UserState { get; set; }
 
-
-        ///// <summary>
-        ///// 
-        ///// </summary>
+        public string? Description { get; set; }
+        public double? Height { get; set; }
         //public ICollection<AddressDto>? Address { get; set; } = new List<AddressDto>();
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        //public ICollection<ImageDto>? Images { get; set; } = new List<ImageDto>();
-
-        ///// <summary>
-        ///// 
-        ///// </summary>
+        public ICollection<ImageDto>? Images { get; set; } = new List<ImageDto>();
         //public ICollection<UserPermissionDto>? UserPermissions { get; set; } = new List<UserPermissionDto>();
-        ///// <summary>
-        ///// 
-        ///// </summary>
+
         //public ICollection<Permission>? Permissions { get; set; } = new List<Permission>();
+        //public ICollection<ProfileDancerDto>? ProfileDancer { get; set; } = new List<ProfileDancerDto>();
+        //public ICollection<CouplesEventDateDto>? CouplesEventsUserHost { get; set; } = new List<CouplesEventDateDto>();
+        //public ICollection<CouplesEventDateDto>? CouplesEventsUserInivted { get; set; } = new List<CouplesEventDateDto>();
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public ProfileDancerDto? ProfileDancer { get; set; } 
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        //public ICollection<CouplesEvent_DateDto>? CouplesEventsHost { get; set; } = new List<CouplesEvent_DateDto>();
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        //public ICollection<CouplesEvent_DateDto>? CouplesEventsInvited { get; set; } = new List<CouplesEvent_DateDto>();
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        //public ICollection<TypeEvent_UserDto>? TypeEventsUsers { get; set; } = new List<TypeEvent_UserDto>();
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        //public ICollection<WaitListDto>? WaitLists { get; set; } = new List<WaitListDto>();
-        ///// <summary>
-        ///// 
-        ///// </summary>{ get; set; }
+        //public ICollection<TypeEventUserDto>? TypeEventsUsers { get; set; } = new List<TypeEventUserDto>();
+
         //public ICollection<EventDto>? EventsCreated = new List<EventDto>();
-
-
-
+        //public ICollection<UserLanguageDto>? Userlanguages { get; set; } = new List<UserLanguageDto>();
 
 
     }

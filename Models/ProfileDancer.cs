@@ -3,13 +3,16 @@
     public class ProfileDancer
     {
         public int ProfileDanceId { get; set; }
-        public int DanceLevel_FK { get; set; }
-        public int DanceRol_FK { get; set; }
-        public double? Height { get; set; }
-        public DanceRol? DanceRol { get; set; } 
-        public DanceLevel? DanceLevel { get; set; }
+        public int DanceLevelId { get; set; }
+        public int DanceRolId { get; set; }
+        public int? DanceId { get; set; }
 
-        public ICollection<User>? Users { get; set; }
+        public int UserId { get; set; }
+
+        public Dance? Dance { get; set; }
+        public DanceRol DanceRol { get; set; } 
+        public DanceLevel DanceLevel { get; set; }
+        public User User { get; set; }
 
     }
 }
